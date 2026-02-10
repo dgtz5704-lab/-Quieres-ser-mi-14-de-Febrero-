@@ -1,12 +1,142 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Minecraft Love Update 💘</title>
+<title>Crea tu Valentine ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
+/* Estilos Generales */
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff5f8d, #ffb3c6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif; /* La carta mantiene letra normal */
+    overflow: hidden;
+    color: white;
+}
+
+/* =========================================
+   PANTALLA 1: GENERADOR (MODO MINECRAFT)
+   ========================================= */
+.generator-container {
+    background: #fdfdfd;
+    border: 4px solid #333; /* Borde oscuro tipo retro */
+    border-radius: 8px; /* Bordes menos redondeados para toque cuadrado */
+    padding: 25px;
+    width: 90%;
+    max-width: 350px;
+    text-align: center;
+    color: #333;
+    /* Aquí aplicamos la fuente Minecraft */
+    font-family: 'Press Start 2P', cursive; 
+    box-shadow: 8px 8px 0px rgba(0,0,0,0.2); /* Sombra dura tipo pixel */
+    display: none; 
+    z-index: 10;
+    position: relative;
+}
+
+/* Decoración de corazones pixelados en el título */
+.pixel-title {
+    color: #ff2e63;
+    font-size: 14px; /* Un poco más pequeño porque esta fuente es ancha */
+    line-height: 1.8;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 0px #ffccd5;
+    text-transform: uppercase;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-label {
+    font-size: 10px;
+    margin-bottom: 8px;
+    display: block;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.pixel-input {
+    width: 100%;
+    padding: 12px;
+    border: 3px solid #333;
+    border-radius: 4px;
+    background: #fff;
+    /* Fuente Minecraft para lo que escribas */
+    font-family: 'Press Start 2P', cursive; 
+    font-size: 10px;
+    color: #333;
+    box-sizing: border-box;
+    outline: none;
+    box-shadow: inset 3px 3px 0px #eee;
+}
+
+.pixel-input:focus {
+    background: #fff0f5;
+}
+
+.btn-generate {
+    background: #4caf50; /* Verde Minecraft */
+    color: white;
+    border: 3px solid #000;
+    border-radius: 4px;
+    padding: 15px;
+    width: 100%;
+    /* Fuente Minecraft para el botón */
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #1e5620; /* Efecto 3D */
+    margin-top: 15px;
+    transition: all 0.1s;
+    text-transform: uppercase;
+}
+
+.btn-generate:active {
+    transform: translateY(6px);
+    box-shadow: 0 0 0 #1e5620;
+}
+
+/* Área del link generado */
+.copy-area {
+    margin-top: 20px;
+    display: none;
+    padding-top: 10px;
+    border-top: 3px dashed #ccc;
+}
+
+.link-box {
+    background: #eee;
+    padding: 10px;
+    font-family: 'Arial', sans-serif; /* Link legible */
+    font-size: 11px;
+    word-break: break-all;
+    border: 2px solid #333;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.action-btn {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+    padding: 10px;
+    border: 2px solid #000;
+    cursor: pointer;
+    margin: 5px;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+}
+
+.action-btn:active {
+    transform: translateY(3px);
+    box-shadow: none;
+}
 /* =========================================
    ESTILO VISUAL: MINECRAFT LOVE EDITION
    ========================================= */
@@ -246,7 +376,7 @@ p.pixel-body {
         <p class="pixel-body" style="color:#cc0052; font-size:12px;">
             ¡Has aceptado! 🐷💖<br><br>
             <span id="final-msg-from"></span> dice:<br>
-            "Eres el diamante más valioso de mi inventario. ¡Feliz 14 de Febrero!"
+            "Eres el diamante más valioso de mi inventario. ¡Feliz San Valentín!"
         </p>
         <button class="mc-btn btn-no" style="font-size:10px; margin-top:10px;" onclick="compartir()">Presumir Logro 📸</button>
     </div>
