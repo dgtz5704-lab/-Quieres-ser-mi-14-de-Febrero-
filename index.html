@@ -15,10 +15,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Arial', sans-serif; /* La carta mantiene letra normal */
+    font-family: 'Arial', sans-serif;
     overflow: hidden;
     color: black;
-    user-select: none; /* Evita que se seleccione texto al tocar rápido */
+    user-select: none;
 }
 
 /* =========================================
@@ -26,149 +26,74 @@ body {
    ========================================= */
 .generator-container {
     background: #fdfdfd;
-    border: 4px solid #333; /* Borde oscuro tipo retro */
-    border-radius: 8px; /* Bordes menos redondeados para toque cuadrado */
+    border: 4px solid #333;
+    border-radius: 8px;
     padding: 25px;
     width: 90%;
     max-width: 350px;
     text-align: center;
     color: #333;
-    /* Aquí aplicamos la fuente Minecraft */
     font-family: 'Press Start 2P', cursive; 
-    box-shadow: 8px 8px 0px rgba(0,0,0,0.2); /* Sombra dura tipo pixel */
+    box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
     display: none; 
     z-index: 10;
     position: relative;
 }
 
-/* Decoración de corazones pixelados en el título */
 .pixel-title {
     color: #ff2e63;
-    font-size: 14px; /* Un poco más pequeño porque esta fuente es ancha */
+    font-size: 14px;
     line-height: 1.8;
     margin-bottom: 25px;
     text-shadow: 2px 2px 0px #ffccd5;
     text-transform: uppercase;
 }
 
-.input-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
+.input-group { margin-bottom: 20px; text-align: left; }
 
 .input-label {
-    font-size: 10px;
-    margin-bottom: 8px;
-    display: block;
-    color: #333;
-    text-transform: uppercase;
+    font-size: 10px; margin-bottom: 8px; display: block; color: #333; text-transform: uppercase;
 }
 
 .pixel-input {
-    width: 100%;
-    padding: 12px;
-    border: 3px solid #333;
-    border-radius: 4px;
-    background: #fff;
-    /* Fuente Minecraft para lo que escribas */
-    font-family: 'Press Start 2P', cursive; 
-    font-size: 10px;
-    color: #333;
-    box-sizing: border-box;
-    outline: none;
-    box-shadow: inset 3px 3px 0px #eee;
+    width: 100%; padding: 12px; border: 3px solid #333; border-radius: 4px; background: #fff;
+    font-family: 'Press Start 2P', cursive; font-size: 10px; color: #333; box-sizing: border-box;
+    outline: none; box-shadow: inset 3px 3px 0px #eee;
 }
-
-.pixel-input:focus {
-    background: #fff0f5;
-}
+.pixel-input:focus { background: #fff0f5; }
 
 .btn-generate {
-    background: #4caf50; /* Verde Minecraft */
-    color: white;
-    border: 3px solid #000;
-    border-radius: 4px;
-    padding: 15px;
-    width: 100%;
-    /* Fuente Minecraft para el botón */
-    font-family: 'Press Start 2P', cursive;
-    font-size: 10px;
-    cursor: pointer;
-    box-shadow: 0 6px 0 #1e5620; /* Efecto 3D */
-    margin-top: 15px;
-    transition: all 0.1s;
-    text-transform: uppercase;
+    background: #4caf50; color: white; border: 3px solid #000; border-radius: 4px; padding: 15px;
+    width: 100%; font-family: 'Press Start 2P', cursive; font-size: 10px; cursor: pointer;
+    box-shadow: 0 6px 0 #1e5620; margin-top: 15px; transition: all 0.1s; text-transform: uppercase;
 }
+.btn-generate:active { transform: translateY(6px); box-shadow: 0 0 0 #1e5620; }
 
-.btn-generate:active {
-    transform: translateY(6px);
-    box-shadow: 0 0 0 #1e5620;
-}
-
-/* Área del link generado */
-.copy-area {
-    margin-top: 20px;
-    display: none;
-    padding-top: 10px;
-    border-top: 3px dashed #ccc;
-}
+.copy-area { margin-top: 20px; display: none; padding-top: 10px; border-top: 3px dashed #ccc; }
 
 .link-box {
-    background: #eee;
-    padding: 10px;
-    font-family: 'Arial', sans-serif; /* Link legible */
-    font-size: 11px;
-    word-break: break-all;
-    border: 2px solid #333;
-    margin-bottom: 10px;
-    color: #555;
+    background: #eee; padding: 10px; font-family: 'Arial', sans-serif; font-size: 11px;
+    word-break: break-all; border: 2px solid #333; margin-bottom: 10px; color: #555;
 }
 
 .action-btn {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 8px;
-    padding: 10px;
-    border: 2px solid #000;
-    cursor: pointer;
-    margin: 5px;
-    box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+    font-family: 'Press Start 2P', cursive; font-size: 8px; padding: 10px; border: 2px solid #000;
+    cursor: pointer; margin: 5px; box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
 }
+.action-btn:active { transform: translateY(3px); box-shadow: none; }
 
-.action-btn:active {
-    transform: translateY(3px);
-    box-shadow: none;
-}
 /* =========================================
    ESTILO VISUAL: MINECRAFT LOVE EDITION
    ========================================= */
 :root {
-    --mc-pink-dark: #b02e6e;  /* Borde oscuro rosa */
-    --mc-pink-light: #ff8fab; /* Rosa claro */
-    --mc-bg-gui: #e0e0e0;     /* Gris interfaz clásico */
+    --mc-pink-dark: #b02e6e;
+    --mc-pink-light: #ff8fab;
+    --mc-bg-gui: #e0e0e0;
     --mc-btn-shadow: #8b2055;
 }
 
-body {
-    margin: 0;
-    height: 100vh;
-    /* Fondo: Atardecer romántico pixelado */
-    background: linear-gradient(180deg, #ffb7b2 0%, #ff9ce6 100%);
-    font-family: 'Press Start 2P', cursive;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    image-rendering: pixelated;
-    user-select: none;
-}
-
-/* Partículas de corazones flotando en el fondo */
 .bg-heart {
-    position: absolute;
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 20px;
-    z-index: 0;
+    position: absolute; color: rgba(255, 255, 255, 0.4); font-size: 20px; z-index: 0;
     animation: floatUp linear infinite;
 }
 
@@ -177,158 +102,72 @@ body {
     to { transform: translateY(-10vh) rotate(20deg); }
 }
 
-/* =========================================
-   CONTENEDOR PRINCIPAL (LA CAJA)
-   ========================================= */
 .minecraft-card {
-    background-color: #f4f4f4;
-    /* Borde grueso estilo bloque de Minecraft */
-    border: 4px solid #000;
-    outline: 4px solid var(--mc-pink-dark); /* Doble borde para efecto bloque */
-    padding: 25px;
-    width: 85%;
-    max-width: 380px;
-    text-align: center;
-    position: relative;
-    z-index: 10;
-    box-shadow: 12px 12px 0px rgba(0,0,0,0.3);
-    border-radius: 4px;
+    background-color: #f4f4f4; border: 4px solid #000; outline: 4px solid var(--mc-pink-dark);
+    padding: 25px; width: 85%; max-width: 380px; text-align: center; position: relative;
+    z-index: 10; box-shadow: 12px 12px 0px rgba(0,0,0,0.3); border-radius: 4px;
 }
 
-/* Título */
 h1.pixel-text {
-    font-size: 14px;
-    color: #cc0052;
-    line-height: 1.6;
-    margin-bottom: 25px;
-    text-shadow: 2px 2px 0px #ffccd5;
-    text-transform: uppercase;
+    font-size: 14px; color: #cc0052; line-height: 1.6; margin-bottom: 25px;
+    text-shadow: 2px 2px 0px #ffccd5; text-transform: uppercase;
 }
 
-/* Texto del cuerpo */
-p.pixel-body {
-    font-size: 10px;
-    color: #444;
-    line-height: 1.8;
-    margin-bottom: 20px;
-}
+p.pixel-body { font-size: 10px; color: #444; line-height: 1.8; margin-bottom: 20px; }
 
-/* =========================================
-   INPUTS (Para el creador)
-   ========================================= */
 .mc-input {
-    width: 100%;
-    background: #fff;
-    border: 3px solid #555;
-    padding: 10px;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 10px;
-    margin-bottom: 15px;
-    color: #aa0044;
-    outline: none;
-    box-shadow: inset 3px 3px 0 #ddd;
+    width: 100%; background: #fff; border: 3px solid #555; padding: 10px;
+    font-family: 'Press Start 2P', cursive; font-size: 10px; margin-bottom: 15px;
+    color: #aa0044; outline: none; box-shadow: inset 3px 3px 0 #ddd;
 }
 
-/* =========================================
-   BOTONES (Estilo Bloque 3D)
-   ========================================= */
 .btn-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px; /* IMPORTANTE: Mucho espacio para que no choquen */
-    margin-top: 25px;
-    position: relative;
-    min-height: 60px; /* Reserva espacio */
+    display: flex; justify-content: center; gap: 40px; margin-top: 25px;
+    position: relative; min-height: 60px;
 }
 
 .mc-btn {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 12px;
-    padding: 15px 20px;
-    cursor: pointer;
-    border: 3px solid #000;
-    box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
-    text-transform: uppercase;
-    transition: transform 0.1s;
-    position: relative; /* Inicialmente relativo */
-    z-index: 20;
+    font-family: 'Press Start 2P', cursive; font-size: 12px; padding: 15px 20px; cursor: pointer;
+    border: 3px solid #000; box-shadow: 4px 4px 0px rgba(0,0,0,0.4); text-transform: uppercase;
+    transition: transform 0.1s; position: relative; z-index: 20;
 }
+.mc-btn:active { transform: translateY(4px); box-shadow: 0 0 0 rgba(0,0,0,0.4); }
 
-.mc-btn:active {
-    transform: translateY(4px);
-    box-shadow: 0 0 0 rgba(0,0,0,0.4);
-}
+.btn-yes { background: #ff2e63; color: white; text-shadow: 2px 2px 0 #8b0036; }
+.btn-no { background: #fff; color: #555; }
+.btn-runaway { position: fixed !important; z-index: 100; }
 
-/* Botón SÍ (Color Poción de Amor - Rosa Fuerte) */
-.btn-yes {
-    background: #ff2e63;
-    color: white;
-    text-shadow: 2px 2px 0 #8b0036;
-}
-
-/* Botón NO (Color TNT - Blanco/Gris) */
-.btn-no {
-    background: #fff;
-    color: #555;
-}
-
-/* Estilo para cuando el botón NO se escapa */
-.btn-runaway {
-    position: fixed !important; /* Se sale de la tarjeta al mundo */
-    z-index: 100;
-}
-
-/* =========================================
-   DETALLES & FOOTER
-   ========================================= */
 .pixel-heart-icon {
-    display: inline-block;
-    color: red;
-    font-size: 18px;
-    animation: palpito 0.8s infinite;
+    display: inline-block; color: red; font-size: 18px; animation: palpito 0.8s infinite;
 }
-
-@keyframes palpito {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-}
+@keyframes palpito { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
 
 .footer-credit {
-    position: fixed;
-    bottom: 15px;
-    right: 15px; /* Lo puse a la derecha para estilo firma */
-    font-size: 8px;
-    color: #fff;
-    background: rgba(0,0,0,0.6);
-    padding: 5px 8px;
-    border: 2px solid #fff;
-    z-index: 50;
+    position: fixed; bottom: 15px; right: 15px; font-size: 8px; color: #fff;
+    background: rgba(0,0,0,0.6); padding: 5px 8px; border: 2px solid #fff; z-index: 50;
     text-shadow: 1px 1px 0 #000;
 }
 
-/* Área de link generado */
 .result-area {
-    display: none;
-    background: #fff0f5;
-    border: 2px dashed #ff2e63;
-    padding: 10px;
-    margin-top: 15px;
+    display: none; background: #fff0f5; border: 2px dashed #ff2e63; padding: 10px; margin-top: 15px;
 }
 .link-text {
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    word-break: break-all;
-    margin-bottom: 10px;
-    color: #333;
+    font-family: Arial, sans-serif; font-size: 10px; word-break: break-all; margin-bottom: 10px; color: #333;
 }
 </style>
 </head>
 
 <body>
 
+<audio id="bgm" loop>
+    <source src="minecraft-music.mp3" type="audio/mpeg">
+</audio>
+<audio id="sfx-success">
+    <source src="levelup.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-    // Script rápido para crear partículas de fondo
+    // Script de partículas de fondo
     for(let i=0; i<15; i++){
         let h = document.createElement('div');
         h.className = 'bg-heart';
@@ -365,7 +204,6 @@ p.pixel-body {
     <div style="font-size:40px; margin-bottom:10px;" class="pixel-heart-icon">💎</div>
     
     <h1 class="pixel-text" id="cardTitle"></h1>
-    
     <p class="pixel-body" id="cardBody"></p>
 
     <div class="btn-container">
@@ -387,12 +225,13 @@ p.pixel-body {
 
 <script>
 // =========================================
-// SISTEMA DE SONIDO SIN ARCHIVOS (WEB AUDIO API)
+// 1. SISTEMA DE CLICK "TIPO MINECRAFT" (Web Audio API)
 // =========================================
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioCtx = new AudioContext();
 
-function playSound(type) {
+function playClickSound() {
+    // Si el audio está suspendido (navegadores), reactivarlo
     if (audioCtx.state === 'suspended') audioCtx.resume();
     
     const osc = audioCtx.createOscillator();
@@ -401,82 +240,51 @@ function playSound(type) {
     osc.connect(gainNode);
     gainNode.connect(audioCtx.destination);
 
-    if (type === 'click') {
-        // Sonido "Blip" seco tipo menú (Onda cuadrada)
-        osc.type = 'square';
-        osc.frequency.setValueAtTime(150, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.1);
-        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.1);
-    } 
-    else if (type === 'success') {
-        // Sonido "Level Up" (Arpegio rápido)
-        const now = audioCtx.currentTime;
-        
-        // Nota 1
-        const osc1 = audioCtx.createOscillator();
-        const g1 = audioCtx.createGain();
-        osc1.type = 'square';
-        osc1.frequency.value = 523.25; // C5
-        osc1.connect(g1); g1.connect(audioCtx.destination);
-        g1.gain.value = 0.1;
-        osc1.start(now); osc1.stop(now + 0.1);
-
-        // Nota 2
-        const osc2 = audioCtx.createOscillator();
-        const g2 = audioCtx.createGain();
-        osc2.type = 'square';
-        osc2.frequency.value = 659.25; // E5
-        osc2.connect(g2); g2.connect(audioCtx.destination);
-        g2.gain.value = 0.1;
-        osc2.start(now + 0.1); osc2.stop(now + 0.2);
-
-        // Nota 3 (Alta)
-        const osc3 = audioCtx.createOscillator();
-        const g3 = audioCtx.createGain();
-        osc3.type = 'square';
-        osc3.frequency.value = 1046.50; // C6
-        osc3.connect(g3); g3.connect(audioCtx.destination);
-        g3.gain.value = 0.1; g3.gain.linearRampToValueAtTime(0, now + 0.6);
-        osc3.start(now + 0.2); osc3.stop(now + 0.6);
-    }
+    // Configuración para sonido "Click" (Seco, como madera/piedra)
+    osc.type = 'triangle'; // Usamos triángulo para que no sea tan chillón como el cuadrado
+    
+    const now = audioCtx.currentTime;
+    
+    // Frecuencia: Golpe seco medio
+    osc.frequency.setValueAtTime(300, now);
+    
+    // Volumen: Golpe rápido y cortante
+    gainNode.gain.setValueAtTime(0.5, now);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1); // Dura solo 0.1 segundos
+    
+    osc.start(now);
+    osc.stop(now + 0.1);
 }
 
-// Asignar sonido de clic a todos los botones del sitio
-document.querySelectorAll('button').forEach(btn => {
-    btn.addEventListener('click', () => playSound('click'));
-});
-
 // =========================================
-// GESTIÓN DE AUDIO (NUEVO)
+// 2. GESTIÓN DE AUDIO EXTERNO (MP3s)
 // =========================================
 const audioBgm = document.getElementById("bgm");
-const audioClick = document.getElementById("sfx-click");
 const audioSuccess = document.getElementById("sfx-success");
 
-// Ajustar volumen para que no moleste
-audioBgm.volume = 0.4;
-audioSuccess.volume = 0.2;
+// Ajustar volumen
+audioBgm.volume = 0.4; // Música de fondo suave
+audioSuccess.volume = 0.8; // Sonido de experiencia fuerte
 
-}
-
-// Función para reproducir sonido de éxito
-function playSuccess() {
+function playLevelUp() {
     audioSuccess.currentTime = 0;
-    audioSuccess.play().catch(e => console.log("Audio prevent"));
+    audioSuccess.play().catch(e => console.log("Error audio success:", e));
 }
 
-// Iniciar música de fondo al primer toque (navegadores bloquean autoplay)
+// Iniciar música de fondo al primer clic en cualquier parte de la página
 document.body.addEventListener('click', () => {
     if (audioBgm.paused) {
         audioBgm.play().catch(e => console.log("Esperando interacción..."));
     }
 }, { once: true });
-    
+
+// Asignar sonido de click a TODOS los botones
+document.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', playClickSound);
+});
+
 // =========================================
-// LÓGICA ORIGINAL
+// LÓGICA DE LA CARTA
 // =========================================
 
 const params = new URLSearchParams(window.location.search);
@@ -490,48 +298,39 @@ if (hasParams) {
     const toName = params.get("to");
     const fromName = params.get("from");
 
-    // Textos Románticos / Minecraft
     document.getElementById("cardTitle").innerHTML = `${toName},<br>¿Quieres ser mi<br>San Valentín?`;
     document.getElementById("cardBody").innerText = `${fromName} quiere construir un mundo contigo.`;
     document.getElementById("final-msg-from").innerText = fromName;
 
-    // --- LÓGICA DEL BOTÓN "NO" (SIN CHOQUES) ---
+    // --- LÓGICA DEL BOTÓN "NO" ---
     const btnNo = document.getElementById("btnNo");
     
     const moveButton = (e) => {
-        // Sonido al intentar atraparlo
-        playSound('click'); 
+        // Sonido de click al intentar tocarlo
+        playClickSound(); 
         
-        // Obtenemos el tamaño de la ventana
         const w = window.innerWidth;
         const h = window.innerHeight;
         
-        // Calculamos posición aleatoria segura (Restamos 100px para que no se salga)
         const newX = Math.random() * (w - 100);
         const newY = Math.random() * (h - 100);
 
-        // Aplicamos clase para que sea 'fixed' (flotante en pantalla) y no 'relative' (dentro de la caja)
         btnNo.classList.add("btn-runaway");
         btnNo.style.left = newX + "px";
         btnNo.style.top = newY + "px";
     };
 
-    // Eventos para PC y Celular
     btnNo.addEventListener("mouseover", moveButton);
-    btnNo.addEventListener("touchstart", (e) => { 
-        e.preventDefault(); // Evita el click real en celular
-        moveButton(); 
-    });
-    btnNo.addEventListener("click", (e) => {
-        e.preventDefault();
-        moveButton();
-    });
+    btnNo.addEventListener("touchstart", (e) => { e.preventDefault(); moveButton(); });
+    btnNo.addEventListener("click", (e) => { e.preventDefault(); moveButton(); });
 
     // --- LÓGICA DEL BOTÓN "SÍ" ---
     document.getElementById("btnSi").onclick = () => {
-        playSound('success'); // Sonido de nivel completado
+        // Reproducir MP3 de Experiencia
+        playLevelUp(); 
+        
         document.getElementById("success-msg").style.display = "block";
-        document.querySelector(".btn-container").style.display = "none"; // Ocultamos botones
+        document.querySelector(".btn-container").style.display = "none";
         lanzarConfeti();
     };
 
@@ -542,7 +341,7 @@ if (hasParams) {
 
 // Funciones Auxiliares
 function generateLink() {
-    playSound('success'); // Sonido de éxito al generar link
+    playLevelUp(); // Sonido de éxito al generar
     
     const from = document.getElementById("inputFrom").value.trim() || "Steve";
     const to = document.getElementById("inputTo").value.trim() || "Alex";
@@ -568,7 +367,6 @@ function compartir() {
 }
 
 function lanzarConfeti() {
-    // Efecto simple de celebración
     const colors = ['#ff0000', '#ff69b4', '#ffffff'];
     for(let i=0; i<30; i++) {
         const c = document.createElement('div');
