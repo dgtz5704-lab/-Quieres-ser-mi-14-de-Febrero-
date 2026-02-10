@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+/* Reset and Body Styles */
 body {
     margin: 0;
     height: 100vh;
@@ -20,6 +21,7 @@ body {
     color: white;
 }
 
+/* Glassmorphism Card */
 .card {
     background: rgba(255,255,255,0.18);
     backdrop-filter: blur(12px);
@@ -30,20 +32,14 @@ body {
     animation: aparecer 1.2s ease;
     box-shadow: 0 20px 40px rgba(0,0,0,.25);
     z-index: 2;
+    position: relative; /* Ensures content stays above background hearts */
 }
 
-h1 {
-    font-size: 22px;
-}
+h1 { font-size: 22px; }
+p { font-size: 15px; opacity: .95; }
 
-p {
-    font-size: 15px;
-    opacity: .95;
-}
-
-.botones {
-    margin-top: 25px;
-}
+/* Buttons */
+.botones { margin-top: 25px; }
 
 button {
     border: none;
@@ -53,22 +49,13 @@ button {
     cursor: pointer;
     transition: transform .2s;
 }
+button:hover { transform: scale(1.1); }
 
-button:hover {
-    transform: scale(1.1);
-}
+#si { background: #ff2e63; color: white; }
+#no { background: white; color: #ff2e63; position: absolute; } 
+/* Note: 'absolute' position is crucial for the moving effect */
 
-#si {
-    background: #ff2e63;
-    color: white;
-}
-
-#no {
-    background: white;
-    color: #ff2e63;
-    position: absolute;
-}
-
+/* Hidden Elements (Success Message) */
 .mensaje {
     margin-top: 20px;
     font-size: 17px;
@@ -76,17 +63,10 @@ button:hover {
     animation: pop 0.8s ease;
 }
 
-.share {
-    margin-top: 15px;
-    display: none;
-}
+.share { margin-top: 15px; display: none; }
+.share button { background: white; color: #ff2e63; font-size: 13px; }
 
-.share button {
-    background: white;
-    color: #ff2e63;
-    font-size: 13px;
-}
-
+/* Animations */
 @keyframes aparecer {
     from {opacity:0; transform: scale(0.85);}
     to {opacity:1; transform: scale(1);}
@@ -98,11 +78,13 @@ button:hover {
     100% {transform: scale(1);}
 }
 
+/* Floating Hearts Background */
 .corazon {
     position: absolute;
     font-size: 22px;
     animation: flotar linear infinite;
     opacity: 0.7;
+    z-index: 1; /* Behind the card */
 }
 
 @keyframes flotar {
@@ -131,16 +113,15 @@ button:hover {
 </div>
 
 <script>
+// 1. Setup Names from URL
 const params = new URLSearchParams(window.location.search);
 const from = params.get("from") || "Alguien especial";
 const to = params.get("to") || "Tú";
 
-document.getElementById("titulo").innerText =
-`${to}, ¿quieres ser mi Valentine? 💘`;
+document.getElementById("titulo").innerText = `${to}, ¿quieres ser mi Valentine? 💘`;
+document.getElementById("texto").innerText = `Con todo mi cariño, ${from}`;
 
-document.getElementById("texto").innerText =
-`Con todo mi cariño, ${from}`;
-
+// 2. "YES" Button Logic
 document.getElementById("si").onclick = () => {
     document.getElementById("mensaje").style.display = "block";
     document.getElementById("mensaje").innerHTML =
@@ -148,8 +129,12 @@ document.getElementById("si").onclick = () => {
      Eres una persona increíble y haces mi mundo más bonito.<br><br>
      💘 Feliz 14 de febrero 💘`;
     document.getElementById("share").style.display = "block";
+    
+    // Hide buttons after saying yes to clean up UI
+    document.querySelector('.botones').style.display = 'none';
 };
 
+// 3. "NO" Button Logic (The Runaway Button)
 const no = document.getElementById("no");
 
 function moverNo() {
@@ -160,9 +145,9 @@ function moverNo() {
 }
 
 no.addEventListener("mouseover", moverNo);
-no.addEventListener("touchstart", moverNo);
+no.addEventListener("touchstart", moverNo); // For mobile support
 
-// Corazones flotando
+// 4. Background Hearts Generator
 setInterval(() => {
     const c = document.createElement("div");
     c.className = "corazon";
@@ -171,10 +156,10 @@ setInterval(() => {
     c.style.fontSize = (Math.random() * 12 + 16) + "px";
     c.style.animationDuration = (Math.random() * 3 + 5) + "s";
     document.body.appendChild(c);
-    setTimeout(() => c.remove(), 7000);
+    setTimeout(() => c.remove(), 7000); // Cleanup to prevent memory leaks
 }, 250);
 
-// Copiar link
+// 5. Copy Link Feature
 function copiarLink() {
     navigator.clipboard.writeText(window.location.href);
     alert("💌 Link copiado para compartir");
