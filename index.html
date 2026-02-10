@@ -124,17 +124,17 @@ button:hover {
     <div class="mensaje" id="mensaje"></div>
 
     <div class="share" id="share">
-        <button onclick="copiarLink()">📲 Compartir link</button>
+        <button onclick="copiarLink()"> Cuenta Bancaria </button>
     </div>
 </div>
 
 <script>
 const params = new URLSearchParams(window.location.search);
-const from = params.get("from") || "Alguien especial";
+const from = params.get("from") || "Dani";
 const to = params.get("to") || "Tú";
 
 document.getElementById("titulo").innerText =
-`${to}, ¿quieres ser mi Valentine? 💘`;
+`${to}, ¿quieres ser mi San Valentín? 💘`;
 
 document.getElementById("texto").innerText =
 `Con todo mi cariño, ${from}`;
