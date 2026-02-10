@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -326,6 +326,16 @@ p.pixel-body {
 
 <body>
 
+<audio id="bgm" loop>
+    <source src="minecraft-music.mp3" type="audio/mpeg">
+</audio>
+<audio id="sfx-click">
+    <source src="click.mp3" type="audio/mpeg">
+</audio>
+<audio id="sfx-success">
+    <source src="levelup.mp3" type="audio/mpeg">
+</audio>
+
 <script>
     // Script rápido para crear partículas de fondo
     for(let i=0; i<15; i++){
@@ -346,7 +356,7 @@ p.pixel-body {
     <label class="pixel-body" style="display:block; text-align:left;">Tu Nombre:</label>
     <input type="text" id="inputFrom" class="mc-input" placeholder="Ej: Tu admirador">
 
-    <label class="pixel-body" style="display:block; text-align:left;">Nombre de tu Amor:</label>
+    <label class="pixel-body" style="display:block; text-align:left;">Nombre de tu san Valentín:</label>
     <input type="text" id="inputTo" class="mc-input" placeholder="Ej: Mi princesa">
 
     <button class="mc-btn btn-yes" style="width:100%; margin-top:10px;" onclick="generateLink()">
@@ -386,7 +396,43 @@ p.pixel-body {
 
 <script>
 // =========================================
-// LÓGICA JAVASCRIPT
+// GESTIÓN DE AUDIO (NUEVO)
+// =========================================
+const audioBgm = document.getElementById("bgm");
+const audioClick = document.getElementById("sfx-click");
+const audioSuccess = document.getElementById("sfx-success");
+
+// Ajustar volumen para que no moleste
+audioBgm.volume = 0.4;
+audioClick.volume = 0.6;
+audioSuccess.volume = 0.6;
+
+// Función para reproducir sonido de clic
+function playClick() {
+    audioClick.currentTime = 0;
+    audioClick.play().catch(e => console.log("Audio prevent"));
+}
+
+// Función para reproducir sonido de éxito
+function playSuccess() {
+    audioSuccess.currentTime = 0;
+    audioSuccess.play().catch(e => console.log("Audio prevent"));
+}
+
+// Iniciar música de fondo al primer toque (navegadores bloquean autoplay)
+document.body.addEventListener('click', () => {
+    if (audioBgm.paused) {
+        audioBgm.play().catch(e => console.log("Esperando interacción..."));
+    }
+}, { once: true });
+
+// Asignar sonido de clic a todos los botones del sitio
+document.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', playClick);
+});
+
+// =========================================
+// LÓGICA ORIGINAL
 // =========================================
 
 const params = new URLSearchParams(window.location.search);
@@ -409,6 +455,9 @@ if (hasParams) {
     const btnNo = document.getElementById("btnNo");
     
     const moveButton = () => {
+        // Sonido extra de click al moverse
+        playClick(); 
+        
         // Obtenemos el tamaño de la ventana
         const w = window.innerWidth;
         const h = window.innerHeight;
@@ -436,6 +485,7 @@ if (hasParams) {
 
     // --- LÓGICA DEL BOTÓN "SÍ" ---
     document.getElementById("btnSi").onclick = () => {
+        playSuccess(); // Sonido de nivel completado
         document.getElementById("success-msg").style.display = "block";
         document.querySelector(".btn-container").style.display = "none"; // Ocultamos botones
         lanzarConfeti();
@@ -448,6 +498,8 @@ if (hasParams) {
 
 // Funciones Auxiliares
 function generateLink() {
+    playSuccess(); // Sonido de éxito al generar link
+    
     const from = document.getElementById("inputFrom").value.trim() || "Steve";
     const to = document.getElementById("inputTo").value.trim() || "Alex";
     
@@ -460,7 +512,7 @@ function generateLink() {
 function copyLink() {
     const url = document.getElementById("linkText").innerText;
     navigator.clipboard.writeText(url);
-    alert("¡Link copiado! Mándaselo a tu amor 🏹");
+    alert("¡Link copiado! Mándaselo a tu san Valentín 🏹");
 }
 
 function openLink() {
@@ -468,7 +520,7 @@ function openLink() {
 }
 
 function compartir() {
-    alert("¡Captura la pantalla y mándasela! 💌");
+    alert("¡Captura la pantalla y Presumela en tu estado! 💌");
 }
 
 function lanzarConfeti() {
