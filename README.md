@@ -1,26 +1,79 @@
 # -Quieres-ser-mi-14-de-Febrero-
 Muchas gracias 🫂
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>💖 Valentine 💖</title>
-  <link rel="stylesheet" href="style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-<div class="hearts"></div>
+* {
+  box-sizing: border-box;
+  font-family: 'Press Start 2P', cursive;
+}
 
-<div class="card" id="card">
-  <h1 id="question">¿Quieres ser mi Valentine?</h1>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 
-  <div class="buttons">
-    <button id="yes">💚 Sí</button>
-    <button id="no">❤️‍🔥 No</button>
-  </div>
-</div>
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  animation: pop 1s ease;
+  z-index: 2;
+}
 
-<script src="script.js"></script>
-</body>
-</html>
+h1 {
+  color: #ff4d6d;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.buttons button {
+  padding: 15px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 15px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#yes {
+  background: #4CAF50;
+  color: white;
+}
+
+#no {
+  background: #ff4d4d;
+  color: white;
+  position: relative;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+@keyframes pop {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+/* Corazones */
+.hearts::before {
+  content: "💖 💕 💗 💓 💞 💘";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: float 10s linear infinite;
+  font-size: 30px;
+}
+
+@keyframes float {
+  from { transform: translateY(100%); }
+  to { transform: translateY(-100%); }
+}
