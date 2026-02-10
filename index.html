@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
-/* Estilos Generales */
+/* Estilos Generales - TU DISEÑO ORIGINAL */
 body {
     margin: 0;
     height: 100vh;
@@ -22,7 +22,7 @@ body {
 }
 
 /* =========================================
-   PANTALLA 1: GENERADOR (MODO MINECRAFT)
+   PANTALLA 1: GENERADOR
    ========================================= */
 .generator-container {
     background: #fdfdfd;
@@ -167,7 +167,7 @@ p.pixel-body { font-size: 10px; color: #444; line-height: 1.8; margin-bottom: 20
 </audio>
 
 <script>
-    // Script de partículas de fondo
+    // Partículas de fondo (Corazones originales)
     for(let i=0; i<15; i++){
         let h = document.createElement('div');
         h.className = 'bg-heart';
@@ -225,13 +225,13 @@ p.pixel-body { font-size: 10px; color: #444; line-height: 1.8; margin-bottom: 20
 
 <script>
 // =========================================
-// 1. SISTEMA DE CLICK "TIPO MINECRAFT" (Web Audio API)
+// 1. SISTEMA DE CLICK (GENERADO POR CÓDIGO)
 // =========================================
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioCtx = new AudioContext();
 
 function playClickSound() {
-    // Si el audio está suspendido (navegadores), reactivarlo
+    // Reactivar audio si el navegador lo suspendió
     if (audioCtx.state === 'suspended') audioCtx.resume();
     
     const osc = audioCtx.createOscillator();
@@ -240,38 +240,35 @@ function playClickSound() {
     osc.connect(gainNode);
     gainNode.connect(audioCtx.destination);
 
-    // Configuración para sonido "Click" (Seco, como madera/piedra)
-    osc.type = 'triangle'; // Usamos triángulo para que no sea tan chillón como el cuadrado
-    
+    // Configuración para sonido "Click" seco tipo Minecraft
+    osc.type = 'triangle'; 
     const now = audioCtx.currentTime;
     
-    // Frecuencia: Golpe seco medio
+    // Frecuencia y duración corta
     osc.frequency.setValueAtTime(300, now);
-    
-    // Volumen: Golpe rápido y cortante
     gainNode.gain.setValueAtTime(0.5, now);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1); // Dura solo 0.1 segundos
+    gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1); 
     
     osc.start(now);
     osc.stop(now + 0.1);
 }
 
 // =========================================
-// 2. GESTIÓN DE AUDIO EXTERNO (MP3s)
+// 2. GESTIÓN DE AUDIO EXTERNO (Tus archivos MP3)
 // =========================================
 const audioBgm = document.getElementById("bgm");
 const audioSuccess = document.getElementById("sfx-success");
 
-// Ajustar volumen
-audioBgm.volume = 0.4; // Música de fondo suave
-audioSuccess.volume = 0.8; // Sonido de experiencia fuerte
+// Ajuste de volumen
+audioBgm.volume = 0.4;
+audioSuccess.volume = 0.8;
 
 function playLevelUp() {
     audioSuccess.currentTime = 0;
-    audioSuccess.play().catch(e => console.log("Error audio success:", e));
+    audioSuccess.play().catch(e => console.log("Error playing success audio"));
 }
 
-// Iniciar música de fondo al primer clic en cualquier parte de la página
+// Iniciar música de fondo al primer clic
 document.body.addEventListener('click', () => {
     if (audioBgm.paused) {
         audioBgm.play().catch(e => console.log("Esperando interacción..."));
@@ -284,14 +281,14 @@ document.querySelectorAll('button').forEach(btn => {
 });
 
 // =========================================
-// LÓGICA DE LA CARTA
+// LÓGICA DE LA CARTA (Igual a la original)
 // =========================================
 
 const params = new URLSearchParams(window.location.search);
 const hasParams = params.has("to") && params.has("from");
 
 if (hasParams) {
-    // === MODO VISUALIZAR CARTA ===
+    // MODO VISUALIZAR
     document.getElementById("screen-creator").style.display = "none";
     document.getElementById("screen-card").style.display = "block";
 
@@ -302,16 +299,14 @@ if (hasParams) {
     document.getElementById("cardBody").innerText = `${fromName} quiere construir un mundo contigo.`;
     document.getElementById("final-msg-from").innerText = fromName;
 
-    // --- LÓGICA DEL BOTÓN "NO" ---
+    // BOTÓN "NO"
     const btnNo = document.getElementById("btnNo");
     
     const moveButton = (e) => {
-        // Sonido de click al intentar tocarlo
-        playClickSound(); 
+        playClickSound(); // Click al moverse
         
         const w = window.innerWidth;
         const h = window.innerHeight;
-        
         const newX = Math.random() * (w - 100);
         const newY = Math.random() * (h - 100);
 
@@ -324,28 +319,24 @@ if (hasParams) {
     btnNo.addEventListener("touchstart", (e) => { e.preventDefault(); moveButton(); });
     btnNo.addEventListener("click", (e) => { e.preventDefault(); moveButton(); });
 
-    // --- LÓGICA DEL BOTÓN "SÍ" ---
+    // BOTÓN "SÍ"
     document.getElementById("btnSi").onclick = () => {
-        // Reproducir MP3 de Experiencia
-        playLevelUp(); 
-        
+        playLevelUp(); // Suena el MP3 de Level Up
         document.getElementById("success-msg").style.display = "block";
         document.querySelector(".btn-container").style.display = "none";
         lanzarConfeti();
     };
 
 } else {
-    // === MODO CREADOR ===
+    // MODO CREADOR
     document.getElementById("screen-creator").style.display = "block";
 }
 
 // Funciones Auxiliares
 function generateLink() {
-    playLevelUp(); // Sonido de éxito al generar
-    
+    playLevelUp(); // Suena level up al crear
     const from = document.getElementById("inputFrom").value.trim() || "Steve";
     const to = document.getElementById("inputTo").value.trim() || "Alex";
-    
     const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}?to=${encodeURIComponent(to)}&from=${encodeURIComponent(from)}`;
     
     document.getElementById("linkText").innerText = url;
@@ -355,7 +346,7 @@ function generateLink() {
 function copyLink() {
     const url = document.getElementById("linkText").innerText;
     navigator.clipboard.writeText(url);
-    alert("¡Link copiado! Mándaselo a tu san Valentín 🏹");
+    alert("¡Link copiado! 🏹");
 }
 
 function openLink() {
@@ -363,7 +354,7 @@ function openLink() {
 }
 
 function compartir() {
-    alert("¡Captura la pantalla y Presumela en tu estado! 💌");
+    alert("¡Captura la pantalla y presume tu logro! 💌");
 }
 
 function lanzarConfeti() {
@@ -379,7 +370,6 @@ function lanzarConfeti() {
         c.style.transition = 'top 2s ease-in, transform 2s';
         c.style.zIndex = '999';
         document.body.appendChild(c);
-        
         setTimeout(() => {
             c.style.top = '110vh';
             c.style.transform = `rotate(${Math.random()*360}deg)`;
