@@ -2,547 +2,395 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Crea tu Valentine ❤️</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minecraft Valentine ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
-/* Estilos Generales */
-body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #ff5f8d, #ffb3c6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Arial', sans-serif; /* La carta mantiene letra normal */
-    overflow: hidden;
-    color: black;
-}
-
 /* =========================================
-   PANTALLA 1: GENERADOR (MODO MINECRAFT)
+   RESET & FONDO ANIMADO
    ========================================= */
-.generator-container {
-    background: #fdfdfd;
-    border: 4px solid #333; /* Borde oscuro tipo retro */
-    border-radius: 8px; /* Bordes menos redondeados para toque cuadrado */
-    padding: 25px;
-    width: 90%;
-    max-width: 350px;
-    text-align: center;
-    color: #333;
-    /* Aquí aplicamos la fuente Minecraft */
-    font-family: 'Press Start 2P', cursive; 
-    box-shadow: 8px 8px 0px rgba(0,0,0,0.2); /* Sombra dura tipo pixel */
-    display: none; 
-    z-index: 10;
-    position: relative;
-}
-
-/* Decoración de corazones pixelados en el título */
-.pixel-title {
-    color: #ff2e63;
-    font-size: 14px; /* Un poco más pequeño porque esta fuente es ancha */
-    line-height: 1.8;
-    margin-bottom: 25px;
-    text-shadow: 2px 2px 0px #ffccd5;
-    text-transform: uppercase;
-}
-
-.input-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.input-label {
-    font-size: 10px;
-    margin-bottom: 8px;
-    display: block;
-    color: #333;
-    text-transform: uppercase;
-}
-
-.pixel-input {
-    width: 100%;
-    padding: 12px;
-    border: 3px solid #333;
-    border-radius: 4px;
-    background: #fff;
-    /* Fuente Minecraft para lo que escribas */
-    font-family: 'Press Start 2P', cursive; 
-    font-size: 10px;
-    color: #333;
-    box-sizing: border-box;
-    outline: none;
-    box-shadow: inset 3px 3px 0px #eee;
-}
-
-.pixel-input:focus {
-    background: #fff0f5;
-}
-
-.btn-generate {
-    background: #4caf50; /* Verde Minecraft */
-    color: white;
-    border: 3px solid #000;
-    border-radius: 4px;
-    padding: 15px;
-    width: 100%;
-    /* Fuente Minecraft para el botón */
-    font-family: 'Press Start 2P', cursive;
-    font-size: 10px;
-    cursor: pointer;
-    box-shadow: 0 6px 0 #1e5620; /* Efecto 3D */
-    margin-top: 15px;
-    transition: all 0.1s;
-    text-transform: uppercase;
-}
-
-.btn-generate:active {
-    transform: translateY(6px);
-    box-shadow: 0 0 0 #1e5620;
-}
-
-/* Área del link generado */
-.copy-area {
-    margin-top: 20px;
-    display: none;
-    padding-top: 10px;
-    border-top: 3px dashed #ccc;
-}
-
-.link-box {
-    background: #eee;
-    padding: 10px;
-    font-family: 'Arial', sans-serif; /* Link legible */
-    font-size: 11px;
-    word-break: break-all;
-    border: 2px solid #333;
-    margin-bottom: 10px;
-    color: #555;
-}
-
-.action-btn {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 8px;
-    padding: 10px;
-    border: 2px solid #000;
-    cursor: pointer;
-    margin: 5px;
-    box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
-}
-
-.action-btn:active {
-    transform: translateY(3px);
-    box-shadow: none;
-}
-/* =========================================
-   ESTILO VISUAL: MINECRAFT LOVE EDITION
-   ========================================= */
-:root {
-    --mc-pink-dark: #b02e6e;  /* Borde oscuro rosa */
-    --mc-pink-light: #ff8fab; /* Rosa claro */
-    --mc-bg-gui: #e0e0e0;     /* Gris interfaz clásico */
-    --mc-btn-shadow: #8b2055;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
     height: 100vh;
-    /* Fondo: Atardecer romántico pixelado */
-    background: linear-gradient(180deg, #ffb7b2 0%, #ff9ce6 100%);
-    font-family: 'Press Start 2P', cursive;
     overflow: hidden;
+    font-family: 'Press Start 2P', cursive;
+    /* Cielo Minecraft */
+    background-color: #79a6ff; 
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    image-rendering: pixelated;
     user-select: none;
 }
 
-/* Partículas de corazones flotando en el fondo */
-.bg-heart {
+/* Nubes en movimiento (CSS puro) */
+.clouds {
     position: absolute;
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 20px;
+    top: 0; left: 0; right: 0; bottom: 0;
     z-index: 0;
-    animation: floatUp linear infinite;
+    background: transparent;
+    pointer-events: none;
 }
 
-@keyframes floatUp {
-    from { transform: translateY(110vh) rotate(0deg); }
-    to { transform: translateY(-10vh) rotate(20deg); }
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    width: 100px; height: 30px;
+    animation: moveClouds linear infinite;
+    opacity: 0.9;
+}
+.cloud::after, .cloud::before {
+    content: ''; position: absolute; background: inherit;
+}
+.cloud::after { width: 40px; height: 40px; top: -20px; left: 15px; }
+.cloud::before { width: 30px; height: 30px; top: -15px; left: 50px; }
+
+@keyframes moveClouds {
+    from { transform: translateX(-150px); }
+    to { transform: translateX(110vw); }
 }
 
 /* =========================================
-   CONTENEDOR PRINCIPAL (LA CAJA)
+   ESTILO GUI (INTERFAZ MINECRAFT)
    ========================================= */
-.minecraft-card {
-    background-color: #f4f4f4;
-    /* Borde grueso estilo bloque de Minecraft */
-    border: 4px solid #000;
-    outline: 4px solid var(--mc-pink-dark); /* Doble borde para efecto bloque */
-    padding: 25px;
-    width: 85%;
-    max-width: 380px;
-    text-align: center;
+.mc-panel {
     position: relative;
     z-index: 10;
-    box-shadow: 12px 12px 0px rgba(0,0,0,0.3);
-    border-radius: 4px;
+    background-color: #c6c6c6; /* Gris clásico */
+    border-top: 4px solid #fff;
+    border-left: 4px solid #fff;
+    border-right: 4px solid #555;
+    border-bottom: 4px solid #555;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 10px 10px 0 rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Título */
-h1.pixel-text {
-    font-size: 14px;
-    color: #cc0052;
-    line-height: 1.6;
-    margin-bottom: 25px;
-    text-shadow: 2px 2px 0px #ffccd5;
-    text-transform: uppercase;
-}
-
-/* Texto del cuerpo */
-p.pixel-body {
-    font-size: 10px;
-    color: #444;
-    line-height: 1.8;
+/* Títulos */
+h1 {
+    font-size: 16px;
+    color: #3f3f3f;
     margin-bottom: 20px;
+    line-height: 1.5;
+    text-shadow: 2px 2px 0px #fff;
 }
 
-/* =========================================
-   INPUTS (Para el creador)
-   ========================================= */
+/* Inputs estilo chat */
 .mc-input {
     width: 100%;
-    background: #fff;
-    border: 3px solid #555;
-    padding: 10px;
+    background: #000;
+    border: 2px solid #a0a0a0;
+    color: #fff;
     font-family: 'Press Start 2P', cursive;
-    font-size: 10px;
+    font-size: 12px;
+    padding: 10px;
     margin-bottom: 15px;
-    color: #aa0044;
     outline: none;
-    box-shadow: inset 3px 3px 0 #ddd;
+}
+.mc-input::placeholder { color: #aaa; }
+
+/* Texto normal */
+p {
+    font-size: 10px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 15px;
 }
 
 /* =========================================
-   BOTONES (Estilo Bloque 3D)
+   BOTONES MINECRAFT
    ========================================= */
-.btn-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px; /* IMPORTANTE: Mucho espacio para que no choquen */
-    margin-top: 25px;
-    position: relative;
-    min-height: 60px; /* Reserva espacio */
-}
-
 .mc-btn {
     font-family: 'Press Start 2P', cursive;
-    font-size: 12px;
-    padding: 15px 20px;
+    font-size: 14px;
+    color: #fff;
+    background: #777;
+    border: none;
+    padding: 12px 10px;
+    width: 100%;
     cursor: pointer;
-    border: 3px solid #000;
-    box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
-    text-transform: uppercase;
-    transition: transform 0.1s;
-    position: relative; /* Inicialmente relativo */
-    z-index: 20;
+    text-shadow: 2px 2px 0 #000;
+    position: relative;
+    
+    /* Efecto 3D CSS */
+    box-shadow: inset -4px -4px 0px #333, inset 4px 4px 0px #fff, 4px 4px 0px #000;
+    margin-top: 10px;
 }
 
 .mc-btn:active {
+    background: #666;
+    box-shadow: inset 4px 4px 0px #333, inset -4px -4px 0px #fff;
     transform: translateY(4px);
-    box-shadow: 0 0 0 rgba(0,0,0,0.4);
 }
 
-/* Botón SÍ (Color Poción de Amor - Rosa Fuerte) */
-.btn-yes {
-    background: #ff2e63;
-    color: white;
-    text-shadow: 2px 2px 0 #8b0036;
+.btn-green { background: #4ba64a; } /* Botón aceptar */
+.btn-red { background: #df4545; }   /* Botón cancelar/no */
+
+/* Contenedor de botones Sí/No */
+.actions {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+    margin-top: 20px;
+    min-height: 60px; /* Espacio para que no colapse */
 }
 
-/* Botón NO (Color TNT - Blanco/Gris) */
-.btn-no {
-    background: #fff;
-    color: #555;
+.btn-floating {
+    width: auto;
+    padding: 12px 20px;
+    transition: left 0.1s, top 0.1s; 
 }
 
-/* Estilo para cuando el botón NO se escapa */
-.btn-runaway {
-    position: fixed !important; /* Se sale de la tarjeta al mundo */
-    z-index: 100;
-}
-
-/* =========================================
-   DETALLES & FOOTER
-   ========================================= */
-.pixel-heart-icon {
-    display: inline-block;
-    color: red;
-    font-size: 18px;
-    animation: palpito 0.8s infinite;
-}
-
-@keyframes palpito {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-}
-
-.footer-credit {
-    position: fixed;
-    bottom: 15px;
-    right: 15px; /* Lo puse a la derecha para estilo firma */
-    font-size: 8px;
-    color: #fff;
-    background: rgba(0,0,0,0.6);
-    padding: 5px 8px;
-    border: 2px solid #fff;
-    z-index: 50;
-    text-shadow: 1px 1px 0 #000;
-}
-
-/* Área de link generado */
-.result-area {
-    display: none;
-    background: #fff0f5;
-    border: 2px dashed #ff2e63;
-    padding: 10px;
+/* Link generado */
+.link-box {
     margin-top: 15px;
-}
-.link-text {
-    font-family: Arial, sans-serif;
+    padding: 10px;
+    background: #e0e0e0;
+    border: 2px solid #555;
+    font-family: monospace;
     font-size: 10px;
     word-break: break-all;
-    margin-bottom: 10px;
-    color: #333;
+    user-select: text;
+    display: none;
 }
+
+/* Corazón flotante */
+.pixel-heart {
+    image-rendering: pixelated;
+    font-size: 40px;
+    animation: heartbeat 1.5s infinite;
+    margin-bottom: 10px;
+    color: #ff3333;
+    text-shadow: 4px 4px 0 #000;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.3); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); }
+    60% { transform: scale(1); }
+}
+
 </style>
 </head>
-
 <body>
 
-<audio id="bgm" loop>
-    <source src="minecraft-music.mp3" type="audio/mpeg">
-</audio>
-<audio id="sfx-click">
-    <source src="click.mp3" type="audio/mpeg">
-</audio>
-<audio id="sfx-success">
-    <source src="levelup.mp3" type="audio/mpeg">
-</audio>
+<div class="clouds">
+    <div class="cloud" style="top: 10%; animation-duration: 25s;"></div>
+    <div class="cloud" style="top: 30%; animation-duration: 35s; opacity: 0.6;"></div>
+    <div class="cloud" style="top: 60%; animation-duration: 20s;"></div>
+</div>
 
-<script>
-    // Script rápido para crear partículas de fondo
-    for(let i=0; i<15; i++){
-        let h = document.createElement('div');
-        h.className = 'bg-heart';
-        h.innerHTML = Math.random() > 0.5 ? '💖' : '🌹';
-        h.style.left = Math.random() * 100 + 'vw';
-        h.style.animationDuration = (Math.random() * 5 + 5) + 's';
-        h.style.opacity = Math.random() * 0.5;
-        document.body.appendChild(h);
-    }
-</script>
-
-<div id="screen-creator" class="minecraft-card" style="border-color: #000;">
-    <div style="font-size:30px; margin-bottom:10px;">🛠️💗</div>
-    <h1 class="pixel-text">Craftear Carta<br>San Valentín</h1>
+<div id="creator-panel" class="mc-panel">
+    <div class="pixel-heart">💎</div>
+    <h1>Craftea tu<br>San Valentín</h1>
     
-    <label class="pixel-body" style="display:block; text-align:left;">Tu Nombre:</label>
-    <input type="text" id="inputFrom" class="mc-input" placeholder="Ej: Tu admirador">
+    <p style="text-align:left; width:100%;">De parte de:</p>
+    <input type="text" id="fromInput" class="mc-input" placeholder="Tu nick...">
+    
+    <p style="text-align:left; width:100%;">Para:</p>
+    <input type="text" id="toInput" class="mc-input" placeholder="Su nick...">
 
-    <label class="pixel-body" style="display:block; text-align:left;">Nombre de tu san Valentín:</label>
-    <input type="text" id="inputTo" class="mc-input" placeholder="Ej: Mi princesa">
+    <button class="mc-btn btn-green" onclick="generateUrl()">GENERAR MUNDO</button>
+    
+    <div id="result-box" class="link-box"></div>
+    <button id="copy-btn" class="mc-btn" style="display:none;" onclick="copyLink()">COPIAR LINK</button>
+</div>
 
-    <button class="mc-btn btn-yes" style="width:100%; margin-top:10px;" onclick="generateLink()">
-        CREAR MUNDO 🌍
-    </button>
+<div id="card-panel" class="mc-panel" style="display:none;">
+    <div class="pixel-heart">❤️</div>
+    <h1 id="card-msg"></h1>
+    <p id="card-sub" style="font-size:12px; color:#555;"></p>
 
-    <div id="result" class="result-area">
-        <div class="link-text" id="linkText"></div>
-        <button class="mc-btn btn-no" style="font-size:10px; padding:8px;" onclick="copyLink()">COPIAR LINK</button>
-        <button class="mc-btn btn-yes" style="font-size:10px; padding:8px;" onclick="openLink()">VER CARTA</button>
+    <div class="actions">
+        <button id="btn-si" class="mc-btn btn-green btn-floating">SÍ</button>
+        <button id="btn-no" class="mc-btn btn-red btn-floating">NO</button>
     </div>
 </div>
 
-<div id="screen-card" class="minecraft-card" style="display:none;">
-    <div style="font-size:40px; margin-bottom:10px;" class="pixel-heart-icon">💎</div>
-    
-    <h1 class="pixel-text" id="cardTitle"></h1>
-    
-    <p class="pixel-body" id="cardBody"></p>
-
-    <div class="btn-container">
-        <button id="btnSi" class="mc-btn btn-yes">SÍ 💘</button>
-        <button id="btnNo" class="mc-btn btn-no">NO 🥀</button>
-    </div>
-
-    <div id="success-msg" style="display:none; margin-top:20px; border-top: 2px solid #ddd; padding-top:15px;">
-        <p class="pixel-body" style="color:#cc0052; font-size:12px;">
-            ¡Has aceptado! 🐷💖<br><br>
-            <span id="final-msg-from"></span> dice:<br>
-            "Eres el diamante más valioso de mi inventario. ¡Feliz San Valentín!"
-        </p>
-        <button class="mc-btn btn-no" style="font-size:10px; margin-top:10px;" onclick="compartir()">Presumir Logro 📸</button>
-    </div>
+<div id="success-panel" class="mc-panel" style="display:none; border-color: gold;">
+    <div style="font-size:50px;">🐷💘</div>
+    <h1 style="color: #4ba64a;">¡Logro Desbloqueado!</h1>
+    <p>Ahora tienen una relación de diamante.</p>
+    <p style="font-size: 8px;">(Captura esto y mándaselo)</p>
 </div>
 
-<div class="footer-credit">Created by Los colochos mx</div>
-
 <script>
-// =========================================
-// GESTIÓN DE AUDIO (NUEVO)
-// =========================================
-const audioBgm = document.getElementById("bgm");
-const audioClick = document.getElementById("sfx-click");
-const audioSuccess = document.getElementById("sfx-success");
+// ==========================================
+// SISTEMA DE AUDIO (Web Audio API - Sin archivos)
+// ==========================================
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const audioCtx = new AudioContext();
 
-// Ajustar volumen para que no moleste
-audioBgm.volume = 0.4;
-audioClick.volume = 0.6;
-audioSuccess.volume = 0.6;
+function playSound(type) {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
 
-// Función para reproducir sonido de clic
-function playClick() {
-    audioClick.currentTime = 0;
-    audioClick.play().catch(e => console.log("Audio prevent"));
-}
-
-// Función para reproducir sonido de éxito
-function playSuccess() {
-    audioSuccess.currentTime = 0;
-    audioSuccess.play().catch(e => console.log("Audio prevent"));
-}
-
-// Iniciar música de fondo al primer toque (navegadores bloquean autoplay)
-document.body.addEventListener('click', () => {
-    if (audioBgm.paused) {
-        audioBgm.play().catch(e => console.log("Esperando interacción..."));
+    if (type === 'click') {
+        // Sonido "Blip" seco tipo menú
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.1);
+        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.1);
+    } 
+    else if (type === 'hover') {
+        // Sonido suave al intentar tocar el NO
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(200, audioCtx.currentTime);
+        gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.05);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.05);
     }
-}, { once: true });
+    else if (type === 'success') {
+        // Sonido "Level Up" (Arpegio rápido)
+        const now = audioCtx.currentTime;
+        
+        // Nota 1
+        const osc1 = audioCtx.createOscillator();
+        const g1 = audioCtx.createGain();
+        osc1.type = 'square';
+        osc1.frequency.value = 523.25; // C5
+        osc1.connect(g1); g1.connect(audioCtx.destination);
+        g1.gain.value = 0.1;
+        osc1.start(now); osc1.stop(now + 0.1);
 
-// Asignar sonido de clic a todos los botones del sitio
-document.querySelectorAll('button').forEach(btn => {
-    btn.addEventListener('click', playClick);
+        // Nota 2
+        const osc2 = audioCtx.createOscillator();
+        const g2 = audioCtx.createGain();
+        osc2.type = 'square';
+        osc2.frequency.value = 659.25; // E5
+        osc2.connect(g2); g2.connect(audioCtx.destination);
+        g2.gain.value = 0.1;
+        osc2.start(now + 0.1); osc2.stop(now + 0.2);
+
+        // Nota 3 (Alta)
+        const osc3 = audioCtx.createOscillator();
+        const g3 = audioCtx.createGain();
+        osc3.type = 'square';
+        osc3.frequency.value = 1046.50; // C6
+        osc3.connect(g3); g3.connect(audioCtx.destination);
+        g3.gain.value = 0.1; g3.gain.linearRampToValueAtTime(0, now + 0.6);
+        osc3.start(now + 0.2); osc3.stop(now + 0.6);
+    }
+}
+
+// Agregar sonido a todos los botones
+document.querySelectorAll('button').forEach(b => {
+    b.addEventListener('click', () => playSound('click'));
 });
 
-// =========================================
-// LÓGICA ORIGINAL
-// =========================================
-
+// ==========================================
+// LÓGICA DE LA TARJETA
+// ==========================================
 const params = new URLSearchParams(window.location.search);
-const hasParams = params.has("to") && params.has("from");
 
-if (hasParams) {
-    // === MODO VISUALIZAR CARTA ===
-    document.getElementById("screen-creator").style.display = "none";
-    document.getElementById("screen-card").style.display = "block";
-
-    const toName = params.get("to");
-    const fromName = params.get("from");
-
-    // Textos Románticos / Minecraft
-    document.getElementById("cardTitle").innerHTML = `${toName},<br>¿Quieres ser mi<br>San Valentín?`;
-    document.getElementById("cardBody").innerText = `${fromName} quiere construir un mundo contigo.`;
-    document.getElementById("final-msg-from").innerText = fromName;
-
-    // --- LÓGICA DEL BOTÓN "NO" (SIN CHOQUES) ---
-    const btnNo = document.getElementById("btnNo");
+// 1. MODO VISUALIZAR
+if (params.has('to')) {
+    document.getElementById('creator-panel').style.display = 'none';
+    document.getElementById('card-panel').style.display = 'flex';
     
-    const moveButton = () => {
-        // Sonido extra de click al moverse
-        playClick(); 
-        
-        // Obtenemos el tamaño de la ventana
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-        
-        // Calculamos posición aleatoria segura (Restamos 100px para que no se salga)
-        const newX = Math.random() * (w - 100);
-        const newY = Math.random() * (h - 100);
+    const toName = params.get('to');
+    const fromName = params.get('from');
+    
+    document.getElementById('card-msg').innerHTML = `¡Hola ${toName}!<br><br>¿Quieres ser mi Player 2?`;
+    document.getElementById('card-sub').innerText = `${fromName} te invita a su servidor.`;
 
-        // Aplicamos clase para que sea 'fixed' (flotante en pantalla) y no 'relative' (dentro de la caja)
-        btnNo.classList.add("btn-runaway");
-        btnNo.style.left = newX + "px";
-        btnNo.style.top = newY + "px";
+    // Lógica Botón NO (Escurridizo)
+    const btnNo = document.getElementById('btn-no');
+    
+    const moveBtn = (e) => {
+        // Evitar click real
+        if(e) e.preventDefault();
+        
+        playSound('hover');
+
+        // Límites de la pantalla (restamos tamaño del botón para que no se salga)
+        const maxX = window.innerWidth - btnNo.offsetWidth - 20;
+        const maxY = window.innerHeight - btnNo.offsetHeight - 20;
+        
+        const randomX = Math.max(10, Math.random() * maxX);
+        const randomY = Math.max(10, Math.random() * maxY);
+        
+        // Convertir a posición fija para que flote libremente
+        btnNo.style.position = 'fixed';
+        btnNo.style.left = randomX + 'px';
+        btnNo.style.top = randomY + 'px';
+        btnNo.style.zIndex = '100'; // Asegurar que quede encima de todo
     };
 
     // Eventos para PC y Celular
-    btnNo.addEventListener("mouseover", moveButton);
-    btnNo.addEventListener("touchstart", (e) => { 
-        e.preventDefault(); // Evita el click real en celular
-        moveButton(); 
+    btnNo.addEventListener('mouseenter', moveBtn);
+    btnNo.addEventListener('touchstart', moveBtn);
+    btnNo.addEventListener('click', moveBtn);
+
+    // Lógica Botón SÍ
+    document.getElementById('btn-si').addEventListener('click', () => {
+        playSound('success');
+        document.getElementById('card-panel').style.display = 'none';
+        document.getElementById('success-panel').style.display = 'flex';
+        createConfetti();
     });
-    btnNo.addEventListener("click", (e) => {
-        e.preventDefault();
-        moveButton();
-    });
+} 
 
-    // --- LÓGICA DEL BOTÓN "SÍ" ---
-    document.getElementById("btnSi").onclick = () => {
-        playSuccess(); // Sonido de nivel completado
-        document.getElementById("success-msg").style.display = "block";
-        document.querySelector(".btn-container").style.display = "none"; // Ocultamos botones
-        lanzarConfeti();
-    };
-
-} else {
-    // === MODO CREADOR ===
-    document.getElementById("screen-creator").style.display = "block";
-}
-
-// Funciones Auxiliares
-function generateLink() {
-    playSuccess(); // Sonido de éxito al generar link
+// 2. MODO CREADOR (GENERAR LINK)
+function generateUrl() {
+    const from = document.getElementById('fromInput').value || 'Steve';
+    const to = document.getElementById('toInput').value || 'Alex';
     
-    const from = document.getElementById("inputFrom").value.trim() || "Steve";
-    const to = document.getElementById("inputTo").value.trim() || "Alex";
+    const url = `${window.location.origin}${window.location.pathname}?to=${encodeURIComponent(to)}&from=${encodeURIComponent(from)}`;
     
-    const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}?to=${encodeURIComponent(to)}&from=${encodeURIComponent(from)}`;
-    
-    document.getElementById("linkText").innerText = url;
-    document.getElementById("result").style.display = "block";
+    const resultBox = document.getElementById('result-box');
+    resultBox.innerText = url;
+    resultBox.style.display = 'block';
+    document.getElementById('copy-btn').style.display = 'block';
 }
 
 function copyLink() {
-    const url = document.getElementById("linkText").innerText;
-    navigator.clipboard.writeText(url);
-    alert("¡Link copiado! Mándaselo a tu san Valentín 🏹");
+    const text = document.getElementById('result-box').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        alert("¡Link copiado al portapapeles! 📋");
+    });
 }
 
-function openLink() {
-    window.location.href = document.getElementById("linkText").innerText;
-}
-
-function compartir() {
-    alert("¡Captura la pantalla y Presumela en tu estado! 💌");
-}
-
-function lanzarConfeti() {
-    // Efecto simple de celebración
-    const colors = ['#ff0000', '#ff69b4', '#ffffff'];
-    for(let i=0; i<30; i++) {
-        const c = document.createElement('div');
-        c.style.position = 'fixed';
-        c.style.left = Math.random()*100 + 'vw';
-        c.style.top = '-10px';
-        c.style.width = '10px';
-        c.style.height = '10px';
-        c.style.backgroundColor = colors[Math.floor(Math.random()*3)];
-        c.style.transition = 'top 2s ease-in, transform 2s';
-        c.style.zIndex = '999';
-        document.body.appendChild(c);
-        
-        setTimeout(() => {
-            c.style.top = '110vh';
-            c.style.transform = `rotate(${Math.random()*360}deg)`;
-        }, 100);
+// 3. EFECTO CONFETI (Corazones pixelados)
+function createConfetti() {
+    for(let i=0; i<50; i++) {
+        const heart = document.createElement('div');
+        heart.innerHTML = Math.random() > 0.5 ? '❤️' : '🌹';
+        heart.style.position = 'fixed';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = '-10px';
+        heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        heart.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+        document.body.appendChild(heart);
     }
+    
+    // CSS inyectado para la animación
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+    `;
+    document.head.appendChild(style);
 }
 </script>
 
