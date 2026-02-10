@@ -450,6 +450,32 @@ document.querySelectorAll('button').forEach(btn => {
 });
 
 // =========================================
+// GESTIÓN DE AUDIO (NUEVO)
+// =========================================
+const audioBgm = document.getElementById("bgm");
+const audioClick = document.getElementById("sfx-click");
+const audioSuccess = document.getElementById("sfx-success");
+
+// Ajustar volumen para que no moleste
+audioBgm.volume = 0.4;
+audioSuccess.volume = 0.2;
+
+}
+
+// Función para reproducir sonido de éxito
+function playSuccess() {
+    audioSuccess.currentTime = 0;
+    audioSuccess.play().catch(e => console.log("Audio prevent"));
+}
+
+// Iniciar música de fondo al primer toque (navegadores bloquean autoplay)
+document.body.addEventListener('click', () => {
+    if (audioBgm.paused) {
+        audioBgm.play().catch(e => console.log("Esperando interacción..."));
+    }
+}, { once: true });
+    
+// =========================================
 // LÓGICA ORIGINAL
 // =========================================
 
