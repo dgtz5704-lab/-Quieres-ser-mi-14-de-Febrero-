@@ -1,79 +1,185 @@
-# -Quieres-ser-mi-14-de-Febrero-
-Muchas gracias 🫂
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+¿Quieres ser mi San Valentín?
+14 de febrero 2026
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Ti ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-* {
-  box-sizing: border-box;
-  font-family: 'Press Start 2P', cursive;
-}
-
+<style>
 body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff5f8d, #ffb3c6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    color: white;
 }
 
 .card {
-  background: white;
-  padding: 30px;
-  border-radius: 25px;
-  text-align: center;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-  animation: pop 1s ease;
-  z-index: 2;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(12px);
+    border-radius: 30px;
+    padding: 30px;
+    max-width: 340px;
+    text-align: center;
+    animation: aparecer 1.2s ease;
+    box-shadow: 0 20px 40px rgba(0,0,0,.25);
+    z-index: 2;
 }
 
 h1 {
-  color: #ff4d6d;
-  font-size: 14px;
-  margin-bottom: 30px;
+    font-size: 22px;
 }
 
-.buttons button {
-  padding: 15px 20px;
-  margin: 10px;
-  border: none;
-  border-radius: 15px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: transform 0.2s;
+p {
+    font-size: 15px;
+    opacity: .95;
 }
 
-#yes {
-  background: #4CAF50;
-  color: white;
+.botones {
+    margin-top: 25px;
 }
 
-#no {
-  background: #ff4d4d;
-  color: white;
-  position: relative;
+button {
+    border: none;
+    border-radius: 30px;
+    padding: 14px 26px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform .2s;
 }
 
 button:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+#si {
+    background: #ff2e63;
+    color: white;
+}
+
+#no {
+    background: white;
+    color: #ff2e63;
+    position: absolute;
+}
+
+.mensaje {
+    margin-top: 20px;
+    font-size: 17px;
+    display: none;
+    animation: pop 0.8s ease;
+}
+
+.share {
+    margin-top: 15px;
+    display: none;
+}
+
+.share button {
+    background: white;
+    color: #ff2e63;
+    font-size: 13px;
+}
+
+@keyframes aparecer {
+    from {opacity:0; transform: scale(0.85);}
+    to {opacity:1; transform: scale(1);}
 }
 
 @keyframes pop {
-  0% { transform: scale(0); }
-  100% { transform: scale(1); }
+    0% {transform: scale(0);}
+    80% {transform: scale(1.1);}
+    100% {transform: scale(1);}
 }
 
-/* Corazones */
-.hearts::before {
-  content: "💖 💕 💗 💓 💞 💘";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  animation: float 10s linear infinite;
-  font-size: 30px;
+.corazon {
+    position: absolute;
+    font-size: 22px;
+    animation: flotar linear infinite;
+    opacity: 0.7;
 }
 
-@keyframes float {
-  from { transform: translateY(100%); }
-  to { transform: translateY(-100%); }
+@keyframes flotar {
+    from {transform: translateY(110vh);}
+    to {transform: translateY(-10vh);}
 }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1 id="titulo"></h1>
+    <p id="texto"></p>
+
+    <div class="botones">
+        <button id="si">Sí 💖</button>
+        <button id="no">No 🙈</button>
+    </div>
+
+    <div class="mensaje" id="mensaje"></div>
+
+    <div class="share" id="share">
+        <button onclick="copiarLink()">📲 Compartir link</button>
+    </div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const from = params.get("from") || "Alguien especial";
+const to = params.get("to") || "Tú";
+
+document.getElementById("titulo").innerText =
+`${to}, ¿quieres ser mi Valentine? 💘`;
+
+document.getElementById("texto").innerText =
+`Con todo mi cariño, ${from}`;
+
+document.getElementById("si").onclick = () => {
+    document.getElementById("mensaje").style.display = "block";
+    document.getElementById("mensaje").innerHTML =
+    `💖 ${from} dice:<br><br>
+     Eres una persona increíble y haces mi mundo más bonito.<br><br>
+     💘 Feliz 14 de febrero 💘`;
+    document.getElementById("share").style.display = "block";
+};
+
+const no = document.getElementById("no");
+
+function moverNo() {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    no.style.left = x + "px";
+    no.style.top = y + "px";
+}
+
+no.addEventListener("mouseover", moverNo);
+no.addEventListener("touchstart", moverNo);
+
+// Corazones flotando
+setInterval(() => {
+    const c = document.createElement("div");
+    c.className = "corazon";
+    c.innerText = Math.random() > 0.5 ? "❤️" : "💖";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.fontSize = (Math.random() * 12 + 16) + "px";
+    c.style.animationDuration = (Math.random() * 3 + 5) + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 7000);
+}, 250);
+
+// Copiar link
+function copiarLink() {
+    navigator.clipboard.writeText(window.location.href);
+    alert("💌 Link copiado para compartir");
+}
+</script>
+
+</body>
+</html>
