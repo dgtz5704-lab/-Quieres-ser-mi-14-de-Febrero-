@@ -51,8 +51,8 @@ body {
 #intro-screen {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.85); /* Fondo oscuro transparente */
-    z-index: 9999; /* Encima de todo */
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -65,7 +65,7 @@ body {
 .blink-text {
     font-size: 12px;
     margin-top: 20px;
-    color: #ffff55; /* Amarillo Minecraft */
+    color: #ffff55;
     animation: blink 1s infinite;
     line-height: 1.5;
 }
@@ -89,7 +89,7 @@ body {
     position: relative;
     z-index: 10;
     color: #404040;
-    display: none; /* Se oculta hasta que pasas la intro */
+    display: none;
 }
 
 h1.pixel-text {
@@ -186,6 +186,7 @@ h1.pixel-text {
    BOTÓN ESMERALDA Y MODAL DE APOYO
    ========================================= */
 .emerald-btn {
+    display: none; /* OCULTO POR DEFECTO: Aparece con JS al ganar/generar */
     position: fixed;
     bottom: 35px; 
     right: 20px;
@@ -197,7 +198,6 @@ h1.pixel-text {
     box-shadow: inset 5px 5px 0 #51e651, 4px 4px 0 rgba(0,0,0,0.4);
     cursor: pointer;
     z-index: 90;
-    display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.1s;
@@ -313,7 +313,7 @@ h1.pixel-text {
     </div>
 </div>
 
-<div class="emerald-btn" onclick="showDonation()" title="Apoyar"></div>
+<div id="emeraldBtn" class="emerald-btn" onclick="showDonation()" title="Apoyar"></div>
 
 <div id="donationModal" class="modal-overlay" onclick="hideDonation(event)">
     <div class="mc-modal">
@@ -329,7 +329,6 @@ h1.pixel-text {
     </div>
 </div>
 
-
 <script>
 // =========================================
 // LOGICA DE AUDIO & INICIO
@@ -337,26 +336,22 @@ h1.pixel-text {
 const audioBgm = document.getElementById("bgm");
 const audioSuccess = document.getElementById("sfx-success");
 const introScreen = document.getElementById("intro-screen");
+const emeraldBtn = document.getElementById("emeraldBtn");
 
 audioBgm.volume = 0.5; 
 audioSuccess.volume = 0.8;
 
-// Función para iniciar la App (Quitar intro y poner música)
+// Función para iniciar la App
 function startApp() {
-    // Intentar reproducir audio
     audioBgm.play().catch(e => console.log("Error audio:", e));
-    
-    // Ocultar intro con efecto
     introScreen.style.transition = "opacity 0.5s";
     introScreen.style.opacity = "0";
     setTimeout(() => {
         introScreen.style.display = "none";
-        // Mostrar la pantalla correcta según la URL
         checkParams();
     }, 500);
 }
 
-// Eventos para iniciar (Click o Tecla)
 introScreen.addEventListener('click', startApp);
 window.addEventListener('keydown', startApp);
 
@@ -366,19 +361,17 @@ function playLevelUp() {
 }
 
 // =========================================
-// LOGICA DE NAVEGACIÓN Y CARTA
+// LOGICA DE NAVEGACIÓN
 // =========================================
 const params = new URLSearchParams(window.location.search);
 const hasParams = params.has("to") && params.has("from");
 
 function checkParams() {
     if (hasParams) {
-        // MODO CARTA
         document.getElementById("screen-creator").style.display = "none";
         document.getElementById("screen-card").style.display = "block";
         initCardLogic();
     } else {
-        // MODO CREADOR
         document.getElementById("screen-creator").style.display = "block";
         document.getElementById("screen-card").style.display = "none";
     }
@@ -407,6 +400,8 @@ function initCardLogic() {
         document.getElementById("success-msg").style.display = "block";
         document.querySelector(".btn-container").style.display = "none";
         lanzarConfetiXP();
+        // MOSTRAR BOTÓN DONACIÓN DESPUÉS DEL SÍ
+        emeraldBtn.style.display = "flex";
     };
 }
 
@@ -418,7 +413,10 @@ function generateLink() {
     const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}?to=${encodeURIComponent(to)}&from=${encodeURIComponent(from)}`;
     document.getElementById("linkText").innerText = url;
     document.getElementById("result").style.display = "block";
+    // MOSTRAR BOTÓN DONACIÓN DESPUÉS DE GENERAR
+    emeraldBtn.style.display = "flex";
 }
+
 function copyLink() {
     navigator.clipboard.writeText(document.getElementById("linkText").innerText);
     alert("Copiado al portapapeles 📋");
