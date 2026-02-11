@@ -13,26 +13,23 @@
 body {
     margin: 0;
     height: 100vh;
-    /* Tu fondo rosa original */
     background: linear-gradient(135deg, #ff5f8d, #ffb3c6);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Press Start 2P', cursive; /* Fuente pixel para todo */
+    font-family: 'Press Start 2P', cursive;
     overflow: hidden;
     user-select: none;
     position: relative;
 }
 
-/* Nubes Pixeladas Animadas */
 .cloud {
     position: absolute;
     background: rgba(255, 255, 255, 0.6);
     width: 100px;
     height: 30px;
-    z-index: 1; /* Detrás de la carta */
+    z-index: 1;
     animation: moveCloud linear infinite;
-    /* Sombra para darle forma de bloque */
     box-shadow: 
         20px -20px 0 0 rgba(255, 255, 255, 0.6),
         40px -20px 0 0 rgba(255, 255, 255, 0.6),
@@ -49,55 +46,77 @@ body {
 }
 
 /* =========================================
+   PANTALLA DE INICIO (INTRO)
+   ========================================= */
+#intro-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Fondo oscuro transparente */
+    z-index: 9999; /* Encima de todo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.blink-text {
+    font-size: 12px;
+    margin-top: 20px;
+    color: #ffff55; /* Amarillo Minecraft */
+    animation: blink 1s infinite;
+    line-height: 1.5;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* =========================================
    LA CARTA (ESTILO GUI MINECRAFT REAL)
    ========================================= */
 .minecraft-card {
-    /* Color Gris Exacto de Minecraft */
     background-color: #C6C6C6; 
-    
-    /* Borde Negro Exterior */
     border: 4px solid #000;
-    
-    /* Efecto 3D de la ventana (Borde blanco arriba/izq, Gris oscuro abajo/der) */
     box-shadow: inset 6px 6px 0px #FFF, inset -6px -6px 0px #555;
-    
     padding: 30px;
     width: 90%;
     max-width: 380px;
     text-align: center;
     position: relative;
-    z-index: 10; /* Encima de las nubes */
-    color: #404040; /* Color de letra gris oscuro de Minecraft */
+    z-index: 10;
+    color: #404040;
+    display: none; /* Se oculta hasta que pasas la intro */
 }
 
-/* Títulos */
 h1.pixel-text {
     font-size: 14px;
     color: #404040;
     line-height: 1.6;
     margin-bottom: 25px;
-    text-shadow: 2px 2px 0px #fff; /* Sombra blanca para relieve */
+    text-shadow: 2px 2px 0px #fff;
     text-transform: uppercase;
 }
 
-/* Inputs mejorados (Cajas negras de chat) */
 .mc-input {
     width: 100%;
     background: #000;
-    border: 2px solid #A0A0A0; /* Borde gris medio */
-    border-top-color: #505050; /* Sombra interna */
+    border: 2px solid #A0A0A0;
+    border-top-color: #505050;
     border-left-color: #505050;
     padding: 12px;
     font-family: 'Press Start 2P', cursive;
     font-size: 10px;
     margin-bottom: 15px;
-    color: #fff; /* Letra blanca como el chat */
+    color: #fff;
     outline: none;
     box-sizing: border-box;
 }
 .mc-input::placeholder { color: #aaa; }
 
-/* Texto normal */
 .input-label {
     font-size: 10px;
     margin-bottom: 8px;
@@ -121,8 +140,6 @@ h1.pixel-text {
     color: #fff;
     text-shadow: 2px 2px 0 #333;
     border: 2px solid #000;
-    
-    /* Efecto Botón 3D Minecraft */
     box-shadow: inset 4px 4px 0 rgba(255,255,255,0.3), inset -4px -4px 0 rgba(0,0,0,0.3);
     position: relative;
     transition: transform 0.1s;
@@ -133,10 +150,9 @@ h1.pixel-text {
     box-shadow: inset 4px 4px 0 rgba(0,0,0,0.3), inset -4px -4px 0 rgba(255,255,255,0.1);
 }
 
-/* Colores de Botones */
-.btn-green { background-color: #568203; } /* Verde Minecraft */
-.btn-red { background-color: #AA0000; }   /* Rojo TNT */
-.btn-blue { background-color: #3C85E0; }  /* Azul Diamante */
+.btn-green { background-color: #568203; }
+.btn-red { background-color: #AA0000; }
+.btn-blue { background-color: #3C85E0; }
 
 .btn-container {
     display: flex;
@@ -146,48 +162,106 @@ h1.pixel-text {
     min-height: 60px;
 }
 
-.btn-runaway {
-    position: fixed !important;
-    z-index: 100;
-}
+.btn-runaway { position: fixed !important; z-index: 100; }
 
-/* Link area */
 .result-area {
-    display: none;
-    background: #e0e0e0;
-    border: 2px solid #555;
-    padding: 10px;
-    margin-top: 15px;
+    display: none; background: #e0e0e0; border: 2px solid #555; padding: 10px; margin-top: 15px;
 }
 .link-text {
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    word-break: break-all;
-    color: #333;
-    margin-bottom: 10px;
+    font-family: Arial, sans-serif; font-size: 10px; word-break: break-all; color: #333; margin-bottom: 10px;
 }
 
 .pixel-heart-icon {
-    font-size: 30px;
-    margin-bottom: 15px;
-    animation: palpito 1s infinite;
+    font-size: 30px; margin-bottom: 15px; animation: palpito 1s infinite;
 }
-
 @keyframes palpito {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+    0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); }
 }
 
-/* Estilo para los créditos centrados en la captura */
 .credits-centered {
-    margin-top: 25px;
-    font-size: 8px;
-    color: #555;
-    text-align: center;
-    text-transform: uppercase;
-    width: 100%;
+    margin-top: 25px; font-size: 8px; color: #555; text-align: center; text-transform: uppercase; width: 100%;
 }
+
+/* =========================================
+   BOTÓN ESMERALDA Y MODAL DE APOYO
+   ========================================= */
+.emerald-btn {
+    position: fixed;
+    bottom: 35px; 
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    background-color: #2eb32e; 
+    border: 3px solid #1b6b1b; 
+    transform: rotate(45deg); 
+    box-shadow: inset 5px 5px 0 #51e651, 4px 4px 0 rgba(0,0,0,0.4);
+    cursor: pointer;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s;
+}
+
+.emerald-btn::after {
+    content: '$';
+    color: #e6ffe6;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20px;
+    transform: rotate(-45deg); 
+    text-shadow: 2px 2px 0 #1b6b1b;
+}
+
+.emerald-btn:active { transform: rotate(45deg) scale(0.9); }
+
+.modal-overlay {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+}
+
+.mc-modal {
+    background-color: #C6C6C6;
+    border: 4px solid #000;
+    box-shadow: inset 6px 6px 0px #FFF, inset -6px -6px 0px #555;
+    padding: 25px;
+    width: 85%;
+    max-width: 320px;
+    text-align: center;
+    position: relative;
+    color: #404040;
+}
+
+.close-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #AA0000;
+    color: white;
+    border: 2px solid #000;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    padding: 4px 8px;
+    cursor: pointer;
+    box-shadow: inset 2px 2px 0 rgba(255,255,255,0.3);
+}
+
+.account-info {
+    background: #000;
+    color: #51e651; 
+    padding: 15px;
+    font-family: monospace; 
+    font-size: 14px;
+    border: 2px solid #555;
+    word-break: break-all;
+    margin: 15px 0;
+    user-select: text; 
+}
+
 </style>
 </head>
 
@@ -197,27 +271,23 @@ h1.pixel-text {
 <div class="cloud c2"></div>
 <div class="cloud c3"></div>
 
-<audio id="bgm" loop>
-    <source src="minecraft-music.mp3" type="audio/mpeg">
-</audio>
-<audio id="sfx-success">
-    <source src="levelup.mp3" type="audio/mpeg">
-</audio>
+<audio id="bgm" loop><source src="minecraft-music.mp3" type="audio/mpeg"></audio>
+<audio id="sfx-success"><source src="levelup.mp3" type="audio/mpeg"></audio>
+
+<div id="intro-screen">
+    <div style="font-size: 40px; margin-bottom: 20px;">💘</div>
+    <h1 style="font-size: 16px; text-shadow: 2px 2px #333; line-height: 1.5;">MINECRAFT<br>VALENTINE</h1>
+    <p class="blink-text">> PRESIONA CUALQUIER TECLA <<br>O TOCA LA PANTALLA</p>
+</div>
 
 <div id="screen-creator" class="minecraft-card">
     <div style="font-size:30px; margin-bottom:10px;">🛠️💗</div>
     <h1 class="pixel-text">Craftear Carta</h1>
-    
     <label class="input-label">Tu Nombre:</label>
     <input type="text" id="inputFrom" class="mc-input" placeholder="Steve">
-
     <label class="input-label">Para:</label>
     <input type="text" id="inputTo" class="mc-input" placeholder="Alex">
-
-    <button class="mc-btn btn-green" onclick="generateLink()">
-        GENERAR MUNDO 🌍
-    </button>
-
+    <button class="mc-btn btn-green" onclick="generateLink()">GENERAR MUNDO 🌍</button>
     <div id="result" class="result-area">
         <div class="link-text" id="linkText"></div>
         <button class="mc-btn btn-blue" style="font-size:10px; padding:8px;" onclick="copyLink()">COPIAR LINK</button>
@@ -225,45 +295,70 @@ h1.pixel-text {
     </div>
 </div>
 
-<div id="screen-card" class="minecraft-card" style="display:none;">
+<div id="screen-card" class="minecraft-card">
     <div class="pixel-heart-icon">💎</div>
-    
     <h1 class="pixel-text" id="cardTitle"></h1>
     <p style="font-size:10px; color:#333; margin-bottom:20px;" id="cardBody"></p>
-
     <div class="btn-container">
         <button id="btnSi" class="mc-btn btn-green" style="width: auto; min-width: 80px;">SÍ 💘</button>
         <button id="btnNo" class="mc-btn btn-red" style="width: auto; min-width: 80px;">NO 🥀</button>
     </div>
-
     <div id="success-msg" style="display:none; margin-top:20px; border-top: 2px dashed #777; padding-top:15px;">
         <h1 class="pixel-text" style="color:#568203;">¡LOGRO OBTENIDO!</h1>
         <p style="font-size:10px; color:#333;">
-            <span id="final-msg-from"></span> dice:<br>
-            "Eres mi diamante más valioso."
+            <span id="final-msg-from"></span> dice:<br>"Eres mi diamante más valioso."
         </p>
         <button class="mc-btn btn-blue" style="font-size:10px; margin-top:10px;" onclick="compartir()">Presumir 📸</button>
-        
         <div class="credits-centered">Created by Los colochos mx</div>
     </div>
 </div>
 
+<div class="emerald-btn" onclick="showDonation()" title="Apoyar"></div>
+
+<div id="donationModal" class="modal-overlay" onclick="hideDonation(event)">
+    <div class="mc-modal">
+        <button class="close-btn" onclick="hideDonation(event)">X</button>
+        <div style="font-size: 30px; margin-bottom: 10px;">💚</div>
+        <h1 class="pixel-text" style="font-size: 12px;">Apoyar al Creador</h1>
+        <p style="font-size: 10px; margin-bottom: 15px;">Si te gustó, puedes apoyarme con una donacióncita:</p>
+        <div class="account-info">
+            CLABE / CUENTA:<br>
+            1234 5678 9012 3456
+        </div>
+        <p style="font-size: 8px; color: #555;">¡Gracias por ser un crack! 💎</p>
+    </div>
+</div>
+
+
 <script>
 // =========================================
-// LOGICA DE AUDIO (Solo MP3)
+// LOGICA DE AUDIO & INICIO
 // =========================================
 const audioBgm = document.getElementById("bgm");
 const audioSuccess = document.getElementById("sfx-success");
+const introScreen = document.getElementById("intro-screen");
 
-audioBgm.volume = 0.5;
+audioBgm.volume = 0.5; 
 audioSuccess.volume = 0.8;
 
-// Música de fondo al tocar la pantalla
-document.body.addEventListener('click', () => {
-    if (audioBgm.paused) {
-        audioBgm.play().catch(e => console.log("Audio prevent"));
-    }
-}, { once: true });
+// Función para iniciar la App (Quitar intro y poner música)
+function startApp() {
+    // Intentar reproducir audio
+    audioBgm.play().catch(e => console.log("Error audio:", e));
+    
+    // Ocultar intro con efecto
+    introScreen.style.transition = "opacity 0.5s";
+    introScreen.style.opacity = "0";
+    setTimeout(() => {
+        introScreen.style.display = "none";
+        // Mostrar la pantalla correcta según la URL
+        checkParams();
+    }, 500);
+}
+
+// Eventos para iniciar (Click o Tecla)
+introScreen.addEventListener('click', startApp);
+window.addEventListener('keydown', startApp);
 
 function playLevelUp() {
     audioSuccess.currentTime = 0;
@@ -271,111 +366,94 @@ function playLevelUp() {
 }
 
 // =========================================
-// LOGICA DE LA CARTA
+// LOGICA DE NAVEGACIÓN Y CARTA
 // =========================================
 const params = new URLSearchParams(window.location.search);
 const hasParams = params.has("to") && params.has("from");
 
-if (hasParams) {
-    // MODO VISUALIZAR
-    document.getElementById("screen-creator").style.display = "none";
-    document.getElementById("screen-card").style.display = "block";
+function checkParams() {
+    if (hasParams) {
+        // MODO CARTA
+        document.getElementById("screen-creator").style.display = "none";
+        document.getElementById("screen-card").style.display = "block";
+        initCardLogic();
+    } else {
+        // MODO CREADOR
+        document.getElementById("screen-creator").style.display = "block";
+        document.getElementById("screen-card").style.display = "none";
+    }
+}
 
+function initCardLogic() {
     const toName = params.get("to");
     const fromName = params.get("from");
-
     document.getElementById("cardTitle").innerHTML = `${toName},<br>¿Quieres ser mi<br>San Valentín?`;
     document.getElementById("cardBody").innerText = `${fromName} quiere compartir sus diamantes contigo.`;
     document.getElementById("final-msg-from").innerText = fromName;
 
-    // BOTÓN "NO" IMPOSIBLE
     const btnNo = document.getElementById("btnNo");
-    
     const moveButton = (e) => {
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-        const newX = Math.random() * (w - 100);
-        const newY = Math.random() * (h - 100);
-
+        const w = window.innerWidth; const h = window.innerHeight;
         btnNo.classList.add("btn-runaway");
-        btnNo.style.left = newX + "px";
-        btnNo.style.top = newY + "px";
+        btnNo.style.left = (Math.random() * (w - 100)) + "px";
+        btnNo.style.top = (Math.random() * (h - 100)) + "px";
     };
-
     btnNo.addEventListener("mouseover", moveButton);
     btnNo.addEventListener("touchstart", (e) => { e.preventDefault(); moveButton(); });
     btnNo.addEventListener("click", (e) => { e.preventDefault(); moveButton(); });
 
-    // BOTÓN "SÍ"
     document.getElementById("btnSi").onclick = () => {
-        playLevelUp(); 
+        playLevelUp();
         document.getElementById("success-msg").style.display = "block";
         document.querySelector(".btn-container").style.display = "none";
-        lanzarConfetiXP(); // Llama a la nueva función de XP
+        lanzarConfetiXP();
     };
-
-} else {
-    // MODO CREADOR
-    document.getElementById("screen-creator").style.display = "block";
 }
 
-// Funciones Auxiliares
+// Funciones del Creador
 function generateLink() {
     playLevelUp();
     const from = document.getElementById("inputFrom").value.trim() || "Steve";
     const to = document.getElementById("inputTo").value.trim() || "Alex";
     const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}?to=${encodeURIComponent(to)}&from=${encodeURIComponent(from)}`;
-    
     document.getElementById("linkText").innerText = url;
     document.getElementById("result").style.display = "block";
 }
-
 function copyLink() {
-    const url = document.getElementById("linkText").innerText;
-    navigator.clipboard.writeText(url);
+    navigator.clipboard.writeText(document.getElementById("linkText").innerText);
     alert("Copiado al portapapeles 📋");
 }
+function openLink() { window.location.href = document.getElementById("linkText").innerText; }
+function compartir() { alert("¡Toma captura y súbelo a tus estados! 📸"); }
 
-function openLink() {
-    window.location.href = document.getElementById("linkText").innerText;
-}
-
-function compartir() {
-    alert("¡Toma captura y súbelo a tus estados! 📸");
-}
-
-// FUNCIÓN NUEVA: Confeti de Experiencia (XP Orbs)
+// Confeti XP
 function lanzarConfetiXP() {
-    // Colores de orbes de experiencia (verdes lima brillantes)
     const colors = ['#88ff00', '#aaff55', '#ccff00', '#bbff33'];
-    
     for(let i=0; i<50; i++) {
         const c = document.createElement('div');
         c.style.position = 'fixed';
-        // Tamaño variable para los orbes
         const size = (Math.random() * 12 + 5) + 'px';
-        c.style.width = size;
-        c.style.height = size;
+        c.style.width = size; c.style.height = size;
         c.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
-        // Hacerlos redondos
         c.style.borderRadius = '50%';
-        // Un pequeño brillo
         c.style.boxShadow = '0 0 6px ' + c.style.backgroundColor;
-        
-        c.style.left = Math.random()*100 + 'vw';
-        c.style.top = '-20px';
-        
-        // Animación de caída
+        c.style.left = Math.random()*100 + 'vw'; c.style.top = '-20px';
         c.style.transition = 'top 3s ease-in, left 3s ease-out, opacity 3s';
         c.style.zIndex = '999';
         document.body.appendChild(c);
-        
         setTimeout(() => {
             c.style.top = '110vh';
-            // Movimiento lateral aleatorio al caer
             c.style.left = (parseFloat(c.style.left) + (Math.random()*20 - 10)) + 'vw';
-            c.style.opacity = '0'; // Se desvanecen al final
+            c.style.opacity = '0';
         }, 100);
+    }
+}
+
+// Modal Donación
+function showDonation() { document.getElementById('donationModal').style.display = 'flex'; }
+function hideDonation(event) {
+    if (event.target.classList.contains('modal-overlay') || event.target.classList.contains('close-btn')) {
+        document.getElementById('donationModal').style.display = 'none';
     }
 }
 </script>
