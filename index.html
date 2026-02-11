@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -179,9 +179,14 @@ h1.pixel-text {
     100% { transform: scale(1); }
 }
 
-.footer-credit {
-    position: fixed; bottom: 10px; right: 10px; font-size: 8px; 
-    color: #fff; background: rgba(0,0,0,0.5); padding: 5px; z-index: 50;
+/* Estilo para los créditos centrados en la captura */
+.credits-centered {
+    margin-top: 25px;
+    font-size: 8px;
+    color: #555;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
 }
 </style>
 </head>
@@ -238,14 +243,14 @@ h1.pixel-text {
             "Eres mi diamante más valioso."
         </p>
         <button class="mc-btn btn-blue" style="font-size:10px; margin-top:10px;" onclick="compartir()">Presumir 📸</button>
+        
+        <div class="credits-centered">Created by Los colochos mx</div>
     </div>
 </div>
 
-<div class="footer-credit">Created by Los colochos mx</div>
-
 <script>
 // =========================================
-// LOGICA DE AUDIO (Solo MP3, sin pitidos)
+// LOGICA DE AUDIO (Solo MP3)
 // =========================================
 const audioBgm = document.getElementById("bgm");
 const audioSuccess = document.getElementById("sfx-success");
@@ -306,7 +311,7 @@ if (hasParams) {
         playLevelUp(); 
         document.getElementById("success-msg").style.display = "block";
         document.querySelector(".btn-container").style.display = "none";
-        lanzarConfeti();
+        lanzarConfetiXP(); // Llama a la nueva función de XP
     };
 
 } else {
@@ -339,22 +344,37 @@ function compartir() {
     alert("¡Toma captura y súbelo a tus estados! 📸");
 }
 
-function lanzarConfeti() {
-    const colors = ['#ff0000', '#ff69b4', '#ffffff'];
-    for(let i=0; i<40; i++) {
+// FUNCIÓN NUEVA: Confeti de Experiencia (XP Orbs)
+function lanzarConfetiXP() {
+    // Colores de orbes de experiencia (verdes lima brillantes)
+    const colors = ['#88ff00', '#aaff55', '#ccff00', '#bbff33'];
+    
+    for(let i=0; i<50; i++) {
         const c = document.createElement('div');
         c.style.position = 'fixed';
+        // Tamaño variable para los orbes
+        const size = (Math.random() * 12 + 5) + 'px';
+        c.style.width = size;
+        c.style.height = size;
+        c.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+        // Hacerlos redondos
+        c.style.borderRadius = '50%';
+        // Un pequeño brillo
+        c.style.boxShadow = '0 0 6px ' + c.style.backgroundColor;
+        
         c.style.left = Math.random()*100 + 'vw';
-        c.style.top = '-10px';
-        c.style.width = '10px';
-        c.style.height = '10px';
-        c.style.backgroundColor = colors[Math.floor(Math.random()*3)];
-        c.style.transition = 'top 3s ease-in, transform 3s';
+        c.style.top = '-20px';
+        
+        // Animación de caída
+        c.style.transition = 'top 3s ease-in, left 3s ease-out, opacity 3s';
         c.style.zIndex = '999';
         document.body.appendChild(c);
+        
         setTimeout(() => {
             c.style.top = '110vh';
-            c.style.transform = `rotate(${Math.random()*360}deg)`;
+            // Movimiento lateral aleatorio al caer
+            c.style.left = (parseFloat(c.style.left) + (Math.random()*20 - 10)) + 'vw';
+            c.style.opacity = '0'; // Se desvanecen al final
         }, 100);
     }
 }
