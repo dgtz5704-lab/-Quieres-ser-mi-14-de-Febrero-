@@ -6,8 +6,8 @@
 <title>🎂 Para Verito</title>
 
 <style>
+*{box-sizing:border-box}
 
-/* ===== FONDO ===== */
 body{
 margin:0;
 height:100vh;
@@ -29,115 +29,37 @@ text-align:center;
 100%{background-position:0% 50%}
 }
 
-/* ===== CARD ===== */
 .card{
-width:90%;
-max-width:750px;
+width:92%;
+max-width:700px;
 background:rgba(255,255,255,.12);
 backdrop-filter:blur(12px);
-padding:30px;
+padding:20px;
 border-radius:25px;
 box-shadow:0 20px 50px rgba(0,0,0,.3);
 position:relative;
 z-index:2;
 }
 
-/* ===== TEXTOS ===== */
-h1{
-font-size:42px;
-margin-bottom:10px;
-}
+h1{font-size:clamp(26px,5vw,40px);}
+p{font-size:clamp(14px,4vw,18px);}
 
-p{
-font-size:20px;
-line-height:1.6;
-}
-
-/* ===== BOTONES ===== */
 button{
-margin:10px;
-padding:14px 28px;
+margin:8px;
+padding:12px 20px;
 border:none;
 border-radius:30px;
 cursor:pointer;
-font-size:18px;
+font-size:16px;
 background:white;
 color:#ff2d75;
-transition:.3s;
 }
 
-button:hover{
-transform:scale(1.1);
-}
+button:active{transform:scale(.95)}
 
-/* ===== PASTEL ===== */
-#cake{
-font-size:120px;
-cursor:pointer;
-transition:.3s;
-}
+#cake{font-size:90px;cursor:pointer;margin:10px 0}
 
-#cake:active{
-transform:scale(1.2);
-}
-
-/* ===== VELAS ===== */
-.candle{
-font-size:30px;
-cursor:pointer;
-}
-
-/* ===== REGALO ===== */
-#gift{
-font-size:90px;
-display:none;
-cursor:pointer;
-animation:pop .6s ease;
-}
-
-@keyframes pop{
-from{transform:scale(0);}
-to{transform:scale(1);}
-}
-
-/* ===== MENSAJE ===== */
-#msg{
-display:none;
-font-size:22px;
-margin-top:15px;
-animation:fade 1s;
-}
-
-@keyframes fade{
-from{opacity:0}
-to{opacity:1}
-}
-
-/* ===== CORAZONES ===== */
-.heart{
-position:absolute;
-font-size:20px;
-animation:up 5s linear forwards;
-}
-
-@keyframes up{
-0%{transform:translateY(0);opacity:1}
-100%{transform:translateY(-120vh);opacity:0}
-}
-
-/* ===== CONFETI ===== */
-.conf{
-position:absolute;
-width:8px;
-height:8px;
-animation:fall 4s linear forwards;
-}
-
-@keyframes fall{
-to{transform:translateY(100vh) rotate(720deg);}
-}
-
-/* ===== INTRO ===== */
+/* INTRO */
 #intro{
 position:absolute;
 width:100%;
@@ -150,37 +72,76 @@ flex-direction:column;
 z-index:10;
 }
 
-#intro h2{
-font-size:40px;
-animation:zoom 1.2s infinite alternate;
-}
+#intro h2{animation:zoom 1.2s infinite alternate}
 
 @keyframes zoom{
 from{transform:scale(1)}
 to{transform:scale(1.1)}
 }
 
-/* ===== CONTADOR ===== */
-#counter{
+/* MODAL */
+#modal{
 position:fixed;
-bottom:10px;
-right:10px;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,.7);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:20;
+}
+
+#modalContent{
 background:white;
 color:#ff2d75;
-padding:10px 15px;
+padding:20px;
 border-radius:20px;
-font-weight:bold;
+width:85%;
+max-width:350px;
+text-align:center;
 }
 
-/* ===== FLORES ===== */
-.flower{
+#giftIcon{font-size:80px;cursor:pointer}
+
+/* CORAZONES */
+.heart{
 position:absolute;
-font-size:22px;
-animation:down 6s linear forwards;
+font-size:20px;
+animation:up 5s linear forwards;
 }
 
-@keyframes down{
-to{transform:translateY(110vh) rotate(360deg);}
+@keyframes up{
+0%{transform:translateY(0);opacity:1}
+100%{transform:translateY(-120vh);opacity:0}
+}
+
+/* CONFETI */
+.conf{
+position:absolute;
+width:8px;
+height:8px;
+animation:fall 3s linear forwards;
+top:-10px;
+}
+
+@keyframes fall{
+to{transform:translateY(120vh) rotate(720deg);}
+}
+
+/* 🐵 MONITO (CORREGIDO) */
+#monkey{
+position:fixed;
+font-size:90px;
+cursor:pointer;
+display:none;
+z-index:999;
+user-select:none;
+animation:bounce .7s infinite alternate;
+}
+
+@keyframes bounce{
+from{transform:translateY(0)}
+to{transform:translateY(-20px)}
 }
 
 </style>
@@ -190,117 +151,128 @@ to{transform:translateY(110vh) rotate(360deg);}
 
 <!-- INTRO -->
 <div id="intro" onclick="start()">
-<h2>🎉 Toca para empezar la sorpresa 🎉</h2>
+<h2>🎉 Toca para empezar 🎉</h2>
 </div>
 
-<!-- TARJETA -->
+<!-- MONITO -->
+<div id="monkey" onclick="catchMonkey()">🐵</div>
+
+<!-- MODAL -->
+<div id="modal">
+<div id="modalContent">
+<div id="giftIcon" onclick="openGift()">🎁</div>
+<h3>¡Ábreme!</h3>
+<button onclick="closeModal()">Cerrar</button>
+</div>
+</div>
+
 <div class="card">
 
-<h1>🎂Suegrita Verito🎂</h1>
+<h1>🎂 Suegrita Verito 🎂</h1>
 
 <p>
-para la personita especial ❤️<br>
+Para la personita especial ❤️<br>
 Gracias por su cariño, apoyo y amor.
 </p>
 
-<div>
-<span class="candle">🕯️</span>
-<span class="candle">🕯️</span>
-<span class="candle">🕯️</span>
-</div>
-
 <div id="cake">🎂</div>
 
-<button onclick="regalo()">🎁 Abrir regalo</button>
-<button onclick="fiesta()">🎊 Celebrar</button>
+<button onclick="openModal()">🎁 Abrir regalo</button>
+<button onclick="celebrar()">🎊 Celebrar</button>
 
-<div id="gift">🎁</div>🎇<
-
-<div id="msg">
-🌹 Feliz cumpleaños suegrita Verito🌹<br><br>
-Que Dios la bendiga con salud, cariño y felicidad ❤️
-  Gracias por su cariño, apoyo y amor.
-
-
-  
-</div>
+<h3 id="msg" style="display:none">
+🌹 Feliz cumpleaños suegrita Verito 🌹<br>
+Te deseo amor, salud y felicidad ❤️
+</h3>
 
 </div>
-
-<div id="counter">❤️cariño: 0</div>
 
 <script>
 
-let amor=0;
+let puntos=0;
 
-/* intro */
+/* inicio */
 function start(){
 document.getElementById("intro").style.display="none";
+spawnMonkey();
 }
 
-/* contador */
-setInterval(()=>{
-amor++;
-document.getElementById("counter").innerText="❤️ Amor: "+amor;
-},1000);
+/* modal */
+function openModal(){
+document.getElementById("modal").style.display="flex";
+}
 
-/* velas */
-document.querySelectorAll(".candle").forEach(v=>{
-v.onclick=()=>v.innerHTML="💨";
-});
-
-/* pastel */
-document.getElementById("cake").onclick=()=>{
-corazones();
-fiesta();
+function closeModal(){
+document.getElementById("modal").style.display="none";
 }
 
 /* regalo */
-function regalo(){
-document.getElementById("gift").style.display="block";
+function openGift(){
 document.getElementById("msg").style.display="block";
+closeModal();
 corazones();
 }
 
-/* corazones */
-function corazones(){
-for(let i=0;i<70;i++){
-let h=document.createElement("div");
-h.className="heart";
-h.innerHTML=Math.random()>0.5?"❤️":"🌸";
-h.style.left=Math.random()*100+"vw";
-h.style.top="100vh";
-h.style.animationDuration=(3+Math.random()*4)+"s";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),7000);
-}
+/* pastel */
+document.getElementById("cake").onclick=()=>{
+openModal();
+corazones();
 }
 
-/* confeti */
-function fiesta(){
+/* CELEBRAR */
+function celebrar(){
 for(let i=0;i<120;i++){
 let c=document.createElement("div");
 c.className="conf";
 c.style.left=Math.random()*100+"vw";
 c.style.background=`hsl(${Math.random()*360},100%,50%)`;
-c.style.animationDuration=(2+Math.random()*3)+"s";
+c.style.animationDuration=(2+Math.random()*2)+"s";
 document.body.appendChild(c);
-setTimeout(()=>c.remove(),5000);
+setTimeout(()=>c.remove(),4000);
 }
-flores();
+spawnMonkey();
 }
 
-/* flores */
-function flores(){
+/* CORAZONES */
+function corazones(){
 for(let i=0;i<40;i++){
-let f=document.createElement("div");
-f.className="flower";
-f.innerHTML="🌸";
-f.style.left=Math.random()*100+"vw";
-f.style.animationDuration=(3+Math.random()*4)+"s";
-document.body.appendChild(f);
-setTimeout(()=>f.remove(),6000);
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML=Math.random()>0.5?"❤️":"🌸";
+h.style.left=Math.random()*100+"vw";
+h.style.top="100vh";
+h.style.animationDuration=(3+Math.random()*3)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
 }
+}
+
+/* 🐵 MONITO FIJO Y COMPLETO */
+function spawnMonkey(){
+let m=document.getElementById("monkey");
+
+m.style.display="block";
+
+/* posición segura (no cortado en pantalla) */
+let x = Math.random() * (window.innerWidth - 100);
+let y = Math.random() * (window.innerHeight - 120);
+
+m.style.left = x + "px";
+m.style.top = y + "px";
+
+/* respawn controlado */
+setTimeout(()=>{
+if(m.style.display=="block"){
+m.style.display="none";
+setTimeout(spawnMonkey,1200);
+}
+},2000);
+}
+
+function catchMonkey(){
+puntos++;
+document.getElementById("monkey").style.display="none";
+setTimeout(spawnMonkey,800);
 }
 
 </script>
