@@ -251,3 +251,256 @@ this.style.transform="scale(1)";
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎂 Feliz Cumpleaños Suegrita</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#ff5f9e,#ffb6c1,#ffe4ec);
+overflow:hidden;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+}
+
+.card{
+width:90%;
+max-width:700px;
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(10px);
+padding:40px;
+border-radius:25px;
+box-shadow:0 15px 35px rgba(0,0,0,.25);
+}
+
+h1{
+font-size:55px;
+margin-bottom:15px;
+}
+
+p{
+font-size:22px;
+line-height:1.6;
+margin:20px 0;
+}
+
+button{
+padding:15px 35px;
+font-size:20px;
+border:none;
+border-radius:40px;
+cursor:pointer;
+background:white;
+color:#ff2d75;
+margin:10px;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+#cake{
+font-size:120px;
+cursor:pointer;
+transition:.3s;
+}
+
+.candle{
+font-size:35px;
+cursor:pointer;
+}
+
+#gift{
+font-size:100px;
+display:none;
+cursor:pointer;
+}
+
+#message{
+display:none;
+font-size:28px;
+margin-top:20px;
+animation:fade 1s;
+}
+
+@keyframes fade{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+.heart{
+position:absolute;
+font-size:25px;
+animation:up 5s linear forwards;
+}
+
+@keyframes up{
+0%{
+transform:translateY(0);
+opacity:1;
+}
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>🎉 Feliz Cumpleaños Suegrita 🎉</h1>
+
+<p>
+Hoy queremos desearle un día lleno de amor,
+felicidad, salud y muchas bendiciones.
+❤️
+</p>
+
+<div>
+
+<span class="candle">🕯️</span>
+<span class="candle">🕯️</span>
+<span class="candle">🕯️</span>
+
+</div>
+
+<div id="cake">
+🎂
+</div>
+
+<button onclick="abrirRegalo()">
+🎁 Abrir Regalo
+</button>
+
+<div id="gift">
+🎁
+</div>
+
+<div id="message">
+
+🌹
+
+¡Feliz Cumpleaños Suegrita!
+
+<br><br>
+
+Que Dios la bendiga siempre.
+
+Gracias por su cariño,
+
+sus consejos
+
+y por formar parte de nuestra familia.
+
+❤️
+
+</div>
+
+</div>
+
+<script>
+
+const velas=document.querySelectorAll(".candle");
+
+let apagadas=0;
+
+velas.forEach(v=>{
+
+v.onclick=()=>{
+
+if(v.innerHTML=="🕯️"){
+
+v.innerHTML="💨";
+
+apagadas++;
+
+}
+
+if(apagadas==3){
+
+alert("🎂 ¡Pida un deseo!");
+
+lluvia();
+
+}
+
+}
+
+});
+
+function abrirRegalo(){
+
+document.getElementById("gift").style.display="block";
+
+document.getElementById("message").style.display="block";
+
+lluvia();
+
+}
+
+function lluvia(){
+
+for(let i=0;i<100;i++){
+
+let h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML=Math.random()>0.5?"❤️":"🌸";
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.bottom="-50px";
+
+h.style.fontSize=(20+Math.random()*25)+"px";
+
+h.style.animationDuration=(3+Math.random()*4)+"s";
+
+document.body.appendChild(h);
+
+setTimeout(()=>{
+
+h.remove();
+
+},7000);
+
+}
+
+}
+
+document.getElementById("cake").onclick=function(){
+
+this.style.transform="scale(1.2) rotate(8deg)";
+
+setTimeout(()=>{
+
+this.style.transform="scale(1)";
+
+},400);
+
+}
+
+</script>
+
+</body>
+</html>
