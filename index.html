@@ -1,199 +1,1408 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>¡Feliz Cumpleaños Suegrita! 🎂</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎂 Feliz Cumpleaños Suegrita ❤️</title>
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 
-body{
-background:linear-gradient(135deg,#ffdde1,#ee9ca7);
-overflow:hidden;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 
-.card{
-width:90%;
-max-width:700px;
-background:white;
-padding:40px;
-border-radius:25px;
-text-align:center;
-box-shadow:0 20px 50px rgba(0,0,0,.25);
-animation:aparecer 1.5s;
-position:relative;
-z-index:2;
-}
+    <!-- Iconos -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-h1{
-font-size:3em;
-color:#d63384;
-margin-bottom:15px;
-}
-
-h2{
-color:#ff4081;
-margin-bottom:20px;
-}
-
-p{
-font-size:20px;
-line-height:1.7;
-color:#444;
-}
-
-.flores{
-font-size:45px;
-margin-bottom:15px;
-}
-
-.pastel{
-font-size:90px;
-animation:flotar 2s infinite alternate;
-margin:20px 0;
-}
-
-button{
-margin-top:25px;
-padding:15px 30px;
-font-size:18px;
-border:none;
-border-radius:40px;
-background:#ff4081;
-color:white;
-cursor:pointer;
-transition:.4s;
-}
-
-button:hover{
-transform:scale(1.08);
-background:#e91e63;
-}
-
-@keyframes flotar{
-from{transform:translateY(0);}
-to{transform:translateY(-15px);}
-}
-
-@keyframes aparecer{
-from{
-opacity:0;
-transform:scale(.8);
-}
-to{
-opacity:1;
-transform:scale(1);
-}
-}
-
-.confeti{
-position:absolute;
-width:12px;
-height:12px;
-border-radius:50%;
-top:-20px;
-animation:caer linear infinite;
-}
-
-@keyframes caer{
-0%{
-transform:translateY(-20px) rotate(0deg);
-}
-100%{
-transform:translateY(110vh) rotate(720deg);
-}
-}
-</style>
 </head>
 
 <body>
 
-<div class="card">
+<!-- Pantalla de bienvenida -->
 
-<div class="flores">
-🌷🌹🌺🌸💐
+<div id="loader">
+
+<h1>🎉</h1>
+
+<h2>Preparando una sorpresa...</h2>
+
+<div class="loader-bar">
+
+<div class="loader-progress"></div>
+
 </div>
 
-<h1>🎉 ¡Feliz Cumpleaños Suegrita! 🎉</h1>
+</div>
 
-<div class="pastel">🎂</div>
+<!-- Música -->
 
-<h2>Con mucho cariño ❤️</h2>
+<audio id="music" loop>
 
-<p>
-Hoy celebramos a una persona muy especial.
-Gracias por su cariño, sus consejos, su alegría
-y por siempre recibirnos con una sonrisa.
-</p>
+<source src="music.mp3" type="audio/mpeg">
 
-<br>
+</audio>
 
-<p>
-Le deseo un año lleno de salud,
-felicidad, bendiciones,
-amor y momentos inolvidables.
-Que todos sus sueños se hagan realidad.
-</p>
+<button id="musicButton">
 
-<br>
+<i class="fa-solid fa-music"></i>
 
-<p>
-🌹 Que Dios la bendiga siempre.
-Disfrute muchísimo este hermoso día.
-¡Muchas felicidades, suegrita! ❤️
-</p>
-
-<button onclick="felicitar()">
-🎁 Abrir sorpresa
 </button>
 
+<!-- Partículas -->
+
+<div id="particles"></div>
+
+<!-- Globos -->
+
+<div id="balloons"></div>
+
+<!-- Corazones -->
+
+<div id="hearts"></div>
+
+<!-- Flores -->
+
+<div id="flowers"></div>
+
+<!-- Confeti -->
+
+<canvas id="confettiCanvas"></canvas>
+
+<!-- Contenido -->
+
+<section class="hero">
+
+<h1 class="title">
+
+🎂 Feliz Cumpleaños Suegrita ❤️
+
+</h1>
+
+<p class="subtitle">
+
+Hoy celebramos a una mujer maravillosa.
+
+Gracias por su cariño,
+
+sus consejos,
+
+su alegría
+
+y por ser parte tan importante de nuestra familia.
+
+</p>
+
+<button id="startButton">
+
+Comenzar la sorpresa 🎁
+
+</button>
+
+</section>
+
+<!-- Pastel -->
+
+<section id="cakeSection" class="hidden">
+
+<h2>
+
+Un deseo muy especial ✨
+
+</h2>
+
+<div class="cake">
+
+<div class="candles">
+
+<div class="candle"></div>
+
+<div class="candle"></div>
+
+<div class="candle"></div>
+
 </div>
 
-<script>
+🎂
 
-function felicitar(){
+</div>
 
-alert("🎂 ¡Feliz Cumpleaños Suegrita! Que tenga un día lleno de amor, salud, alegría y muchas bendiciones. ❤️");
+<p>
 
-lanzarConfeti();
+Haz clic sobre las velas para apagarlas.
+
+</p>
+
+</section>
+
+<!-- Carta -->
+
+<section id="letterSection" class="hidden">
+
+<div class="letter">
+
+<h2>💌 Carta para usted</h2>
+
+<p>
+
+Querida suegrita...
+
+</p>
+
+<p>
+
+Gracias por cada sonrisa,
+
+por su cariño,
+
+por su apoyo
+
+y por abrirnos siempre las puertas de su hogar.
+
+</p>
+
+<p>
+
+Que Dios la llene de salud,
+
+amor,
+
+felicidad
+
+y muchísimas bendiciones.
+
+</p>
+
+<p>
+
+¡Feliz cumpleaños!
+
+❤️
+
+</p>
+
+</div>
+
+</section>
+
+<!-- Regalo -->
+
+<section id="giftSection" class="hidden">
+
+<h2>
+
+🎁 Hay un regalo para usted
+
+</h2>
+
+<div id="giftBox">
+
+🎁
+
+</div>
+
+<p>
+
+Presione el regalo.
+
+</p>
+
+</section>
+
+<!-- Galería -->
+
+<section id="gallerySection" class="hidden">
+
+<h2>
+
+📸 Nuestros mejores recuerdos
+
+</h2>
+
+<div class="gallery">
+
+<img src="img/foto1.jpg">
+
+<img src="img/foto2.jpg">
+
+<img src="img/foto3.jpg">
+
+<img src="img/foto4.jpg">
+
+</div>
+
+</section>
+
+<!-- Mensaje Final -->
+
+<section id="finalSection" class="hidden">
+
+<h1>
+
+🎆 ¡FELIZ CUMPLEAÑOS SUEGRITA! 🎆
+
+</h1>
+
+<p>
+
+Que este nuevo año de vida esté lleno de alegría,
+
+amor,
+
+salud,
+
+prosperidad
+
+y momentos inolvidables.
+
+</p>
+
+<h2>
+
+❤️ La queremos muchísimo ❤️
+
+</h2>
+
+<button id="fireworksButton">
+
+Celebrar 🎇
+
+</button>
+
+</section>
+
+<footer>
+
+Hecho con mucho cariño ❤️
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
+/* ===========================================
+   Feliz Cumpleaños Suegrita ❤️
+   style.css — Parte 2A
+=========================================== */
+
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+    background:linear-gradient(-45deg,#ffdde1,#ee9ca7,#fad0c4,#ffd1ff);
+    background-size:400% 400%;
+    animation:gradientBG 15s ease infinite;
+    color:#fff;
+    min-height:100vh;
+}
+
+/* FONDO ANIMADO */
+
+@keyframes gradientBG{
+
+0%{
+background-position:0% 50%;
+}
+
+50%{
+background-position:100% 50%;
+}
+
+100%{
+background-position:0% 50%;
+}
 
 }
+
+/* ===========================
+LOADER
+=========================== */
+
+#loader{
+
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#ff4f87;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:9999;
+
+}
+
+#loader h1{
+
+font-size:90px;
+animation:loaderBounce 1.5s infinite;
+
+}
+
+#loader h2{
+
+margin-top:20px;
+font-size:25px;
+
+}
+
+.loader-bar{
+
+margin-top:25px;
+width:300px;
+height:10px;
+background:white;
+border-radius:50px;
+overflow:hidden;
+
+}
+
+.loader-progress{
+
+width:0%;
+height:100%;
+background:gold;
+animation:loading 4s forwards;
+
+}
+
+@keyframes loading{
+
+0%{width:0%;}
+
+100%{width:100%;}
+
+}
+
+@keyframes loaderBounce{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-15px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+/* ===========================
+BOTÓN MÚSICA
+=========================== */
+
+#musicButton{
+
+position:fixed;
+top:20px;
+right:20px;
+
+width:60px;
+height:60px;
+
+border:none;
+border-radius:50%;
+
+background:white;
+
+color:#ff4081;
+
+font-size:22px;
+
+cursor:pointer;
+
+box-shadow:0 10px 30px rgba(0,0,0,.25);
+
+transition:.4s;
+
+z-index:900;
+
+}
+
+#musicButton:hover{
+
+transform:rotate(360deg) scale(1.1);
+
+}
+
+/* ===========================
+PARTÍCULAS
+=========================== */
+
+#particles{
+
+position:fixed;
+
+width:100%;
+
+height:100%;
+
+top:0;
+
+left:0;
+
+pointer-events:none;
+
+z-index:-2;
+
+}
+
+/* ===========================
+GLOBOS
+=========================== */
+
+#balloons{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+pointer-events:none;
+
+overflow:hidden;
+
+z-index:-1;
+
+}
+
+/* ===========================
+CORAZONES
+=========================== */
+
+#hearts{
+
+position:fixed;
+
+width:100%;
+
+height:100%;
+
+pointer-events:none;
+
+z-index:-1;
+
+}
+
+/* ===========================
+FLORES
+=========================== */
+
+#flowers{
+
+position:fixed;
+
+width:100%;
+
+height:100%;
+
+pointer-events:none;
+
+z-index:-1;
+
+}
+
+/* ===========================
+CONFETI
+=========================== */
+
+#confettiCanvas{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+pointer-events:none;
+
+z-index:100;
+
+}
+
+/* ===========================
+HERO
+=========================== */
+
+.hero{
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+flex-direction:column;
+
+text-align:center;
+
+padding:40px;
+
+}
+
+.title{
+
+font-family:'Dancing Script',cursive;
+
+font-size:70px;
+
+text-shadow:3px 3px 12px rgba(0,0,0,.3);
+
+animation:titleFloat 3s infinite;
+
+}
+
+.subtitle{
+
+margin-top:25px;
+
+max-width:750px;
+
+font-size:22px;
+
+line-height:1.9;
+
+}
+
+@keyframes titleFloat{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-10px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ===========================
+BOTÓN PRINCIPAL
+=========================== */
+
+#startButton{
+
+margin-top:40px;
+
+padding:18px 45px;
+
+border:none;
+
+border-radius:50px;
+
+font-size:22px;
+
+background:white;
+
+color:#ff4081;
+
+cursor:pointer;
+
+transition:.4s;
+
+font-weight:bold;
+
+box-shadow:0 15px 30px rgba(0,0,0,.2);
+
+}
+
+#startButton:hover{
+
+transform:scale(1.08);
+
+background:#ffe4ef;
+
+}
+
+/* ===========================
+SECCIONES
+=========================== */
+
+section{
+
+padding:80px 20px;
+
+text-align:center;
+
+}
+
+.hidden{
+
+display:none;
+
+}
+
+section h2{
+
+font-size:42px;
+
+margin-bottom:25px;
+
+font-family:'Dancing Script',cursive;
+
+}
+
+section p{
+
+font-size:21px;
+
+line-height:1.8;
+
+max-width:900px;
+
+margin:auto;
+
+}
+
+/* ===========================
+FOOTER
+=========================== */
+
+footer{
+
+padding:40px;
+
+text-align:center;
+
+font-size:18px;
+
+background:rgba(255,255,255,.15);
+
+backdrop-filter:blur(8px);
+
+}
+
+/* ===========================
+RESPONSIVE
+=========================== */
+
+@media(max-width:768px){
+
+.title{
+
+font-size:46px;
+
+}
+
+.subtitle{
+
+font-size:18px;
+
+}
+
+section h2{
+
+font-size:34px;
+
+}
+
+section p{
+
+font-size:18px;
+
+}
+
+#musicButton{
+
+width:50px;
+
+height:50px;
+
+font-size:18px;
+
+}
+
+.loader-bar{
+
+width:220px;
+
+}
+
+}
+
+/* ===========================================
+   STYLE.CSS - PARTE 2B-1
+   Pastel, velas, globos, corazones y flores
+=========================================== */
+
+/* ---------- PASTEL ---------- */
+
+.cake{
+    position:relative;
+    margin:50px auto;
+    width:220px;
+    font-size:130px;
+    animation:floatCake 3s ease-in-out infinite;
+    cursor:pointer;
+    user-select:none;
+}
+
+@keyframes floatCake{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-12px);}
+    100%{transform:translateY(0);}
+}
+
+.candles{
+    position:absolute;
+    top:-18px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:18px;
+}
+
+.candle{
+    width:10px;
+    height:38px;
+    border-radius:10px;
+    background:#ffffff;
+    position:relative;
+    cursor:pointer;
+}
+
+.candle::before{
+    content:"";
+    position:absolute;
+    top:-13px;
+    left:50%;
+    transform:translateX(-50%);
+    width:12px;
+    height:18px;
+    border-radius:50%;
+    background:gold;
+    box-shadow:0 0 20px gold;
+    animation:flame .7s infinite alternate;
+}
+
+.candle.off::before{
+    opacity:0;
+}
+
+@keyframes flame{
+
+0%{
+transform:translateX(-50%) scale(1);
+}
+
+100%{
+transform:translateX(-50%) scale(1.2);
+}
+
+}
+
+/* ---------- GLOBOS ---------- */
+
+.balloon{
+
+position:absolute;
+
+bottom:-180px;
+
+font-size:55px;
+
+animation:balloonUp linear forwards;
+
+pointer-events:none;
+
+}
+
+@keyframes balloonUp{
+
+0%{
+transform:translateY(0);
+opacity:1;
+}
+
+100%{
+transform:translateY(-130vh);
+opacity:0;
+}
+
+}
+
+/* ---------- CORAZONES ---------- */
+
+.heart{
+
+position:absolute;
+
+bottom:-50px;
+
+color:#ff2d75;
+
+font-size:24px;
+
+animation:heartUp linear forwards;
+
+pointer-events:none;
+
+filter:drop-shadow(0 0 8px pink);
+
+}
+
+@keyframes heartUp{
+
+0%{
+
+transform:translateY(0) scale(.5);
+
+opacity:0;
+
+}
+
+20%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(-120vh) scale(1.5);
+
+opacity:0;
+
+}
+
+}
+
+/* ---------- FLORES ---------- */
+
+.flower{
+
+position:absolute;
+
+top:-40px;
+
+font-size:28px;
+
+animation:flowerFall linear forwards;
+
+pointer-events:none;
+
+}
+
+@keyframes flowerFall{
+
+0%{
+
+transform:translateY(-30px) rotate(0deg);
+
+}
+
+100%{
+
+transform:translateY(120vh) rotate(720deg);
+
+}
+
+}
+
+/* ---------- EFECTOS ---------- */
+
+.glow{
+
+animation:glow 1.5s infinite;
+
+}
+
+@keyframes glow{
+
+0%{
+
+filter:drop-shadow(0 0 5px #fff);
+
+}
+
+50%{
+
+filter:drop-shadow(0 0 20px gold);
+
+}
+
+100%{
+
+filter:drop-shadow(0 0 5px #fff);
+
+}
+
+}
+
+.fadeIn{
+
+animation:fadeIn .8s ease;
+
+}
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+.zoom{
+
+animation:zoom 1s;
+
+}
+
+@keyframes zoom{
+
+0%{
+
+transform:scale(.5);
+
+}
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
+
+/* ===========================================
+   STYLE.CSS - PARTE 2B-2
+   Carta, regalo, galería, mensaje final
+=========================================== */
+
+/* ===== CARTA ===== */
+
+.letter{
+    max-width:750px;
+    margin:40px auto;
+    background:rgba(255,255,255,.95);
+    color:#444;
+    padding:40px;
+    border-radius:25px;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+    transition:.5s;
+}
+
+.letter:hover{
+    transform:translateY(-10px) scale(1.02);
+}
+
+.letter h2{
+    color:#e91e63;
+    margin-bottom:25px;
+}
+
+.letter p{
+    margin:15px 0;
+    line-height:1.8;
+}
+
+/* ===== REGALO ===== */
+
+#giftSection{
+    text-align:center;
+}
+
+#giftBox{
+    font-size:130px;
+    cursor:pointer;
+    display:inline-block;
+    transition:.4s;
+    animation:giftBounce 2s infinite;
+}
+
+#giftBox:hover{
+    transform:scale(1.15) rotate(-8deg);
+}
+
+@keyframes giftBounce{
+
+0%,100%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-18px);
+}
+
+}
+
+/* ===== GALERÍA ===== */
+
+.gallery{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+max-width:1000px;
+
+margin:50px auto;
+
+}
+
+.gallery img{
+
+width:100%;
+
+height:250px;
+
+object-fit:cover;
+
+border-radius:20px;
+
+transition:.4s
+
+/* ==========================================
+   FELIZ CUMPLEAÑOS SUEGRITA ❤️
+   script.js - Parte 3A
+========================================== */
+
+const loader = document.getElementById("loader");
+const music = document.getElementById("music");
+const musicButton = document.getElementById("musicButton");
+
+const startButton = document.getElementById("startButton");
+const cakeSection = document.getElementById("cakeSection");
+const letterSection = document.getElementById("letterSection");
+const giftSection = document.getElementById("giftSection");
+const gallerySection = document.getElementById("gallerySection");
+const finalSection = document.getElementById("finalSection");
+
+const giftBox = document.getElementById("giftBox");
+const fireworksButton = document.getElementById("fireworksButton");
+
+/*=========================
+  LOADER
+=========================*/
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+
+        loader.style.opacity = "0";
+
+        loader.style.transition = "1s";
+
+        setTimeout(() => {
+
+            loader.style.display = "none";
+
+        },1000);
+
+    },3500);
+
+});
+
+/*=========================
+ MÚSICA
+=========================*/
+
+let musicPlaying = false;
+
+musicButton.addEventListener("click", () => {
+
+    if(musicPlaying){
+
+        music.pause();
+
+        musicPlaying = false;
+
+        musicButton.innerHTML =
+        '<i class="fa-solid fa-music"></i>';
+
+    }else{
+
+        music.play();
+
+        musicPlaying = true;
+
+        musicButton.innerHTML =
+        '<i class="fa-solid fa-pause"></i>';
+
+    }
+
+});
+
+/*=========================
+ COMENZAR SORPRESA
+=========================*/
+
+startButton.addEventListener("click", () => {
+
+    cakeSection.classList.remove("hidden");
+
+    letterSection.classList.remove("hidden");
+
+    giftSection.classList.remove("hidden");
+
+    gallerySection.classList.remove("hidden");
+
+    finalSection.classList.remove("hidden");
+
+    cakeSection.classList.add("fadeIn");
+    letterSection.classList.add("fadeIn");
+    giftSection.classList.add("fadeIn");
+    gallerySection.classList.add("fadeIn");
+    finalSection.classList.add("fadeIn");
+
+    window.scrollTo({
+
+        top:cakeSection.offsetTop,
+
+        behavior:"smooth"
+
+    });
+
+});
+
+/*=========================
+ GLOBOS
+=========================*/
+
+function createBalloon(){
+
+    const balloon = document.createElement("div");
+
+    balloon.className = "balloon";
+
+    balloon.innerHTML =
+    ["🎈","🎈","🎈","🎉"][Math.floor(Math.random()*4)];
+
+    balloon.style.left =
+    Math.random()*100+"vw";
+
+    balloon.style.animationDuration =
+    (Math.random()*5+6)+"s";
+
+    balloon.style.fontSize =
+    (Math.random()*30+35)+"px";
+
+    document.getElementById("balloons")
+    .appendChild(balloon);
+
+    setTimeout(()=>{
+
+        balloon.remove();
+
+    },12000);
+
+}
+
+setInterval(createBalloon,900);
+
+/*=========================
+ CORAZONES
+=========================*/
+
+function createHeart(){
+
+    const heart =
+    document.createElement("div");
+
+    heart.className="heart";
+
+    heart.innerHTML="❤️";
+
+    heart.style.left=
+    Math.random()*100+"vw";
+
+    heart.style.animationDuration=
+    (Math.random()*4+5)+"s";
+
+    document.getElementById("hearts")
+    .appendChild(heart);
+
+    setTimeout(()=>{
+
+        heart.remove();
+
+    },9000);
+
+}
+
+setInterval(createHeart,500);
+
+/*=========================
+ FLORES
+=========================*/
+
+function createFlower(){
+
+    const flower =
+    document.createElement("div");
+
+    flower.className="flower";
+
+    flower.innerHTML=
+    ["🌸","🌺","🌷","🌹","💮"]
+    [Math.floor(Math.random()*5)];
+
+    flower.style.left=
+    Math.random()*100+"vw";
+
+    flower.style.animationDuration=
+    (Math.random()*6+6)+"s";
+
+    document.getElementById("flowers")
+    .appendChild(flower);
+
+    setTimeout(()=>{
+
+        flower.remove();
+
+    },13000);
+
+}
+
+setInterval(createFlower,700);
+
+
+/* Velas */
+
+const candles = document.querySelectorAll(".candle");
+let apagadas = 0;
+
+candles.forEach(c => {
+    c.onclick = () => {
+        if (!c.classList.contains("off")) {
+            c.classList.add("off");
+            apagadas++;
+
+            if (apagadas === candles.length) {
+                lanzarConfeti();
+                alert("🎉 ¡Pide un deseo para la suegrita!");
+            }
+        }
+    };
+});
+
+/* Regalo */
+
+giftBox.onclick = () => {
+
+    giftBox.innerHTML = "💖";
+
+    giftBox.style.transform = "scale(1.3)";
+
+    alert("🎂 ¡Feliz Cumpleaños Suegrita!\n\nQue Dios la llene de salud, amor, felicidad y muchas bendiciones. ❤️");
+
+};
+
+/* Confeti */
 
 function lanzarConfeti(){
 
-for(let i=0;i<200;i++){
+    for(let i=0;i<120;i++){
 
-const c=document.createElement("div");
+        const c=document.createElement("div");
 
-c.className="confeti";
+        c.style.position="fixed";
+        c.style.left=Math.random()*100+"vw";
+        c.style.top="-20px";
+        c.style.width="8px";
+        c.style.height="8px";
+        c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+        c.style.borderRadius="50%";
+        c
 
-c.style.left=Math.random()*100+"vw";
+      /* Fuegos artificiales */
 
-c.style.animationDuration=(Math.random()*3+2)+"s";
+fireworksButton.onclick = () => {
 
-c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    for(let i=0; i<25; i++){
 
-document.body.appendChild(c);
+        const fire = document.createElement("div");
 
-setTimeout(()=>{
-c.remove();
-},6000);
+        fire.innerHTML = "✨";
+        fire.style.position = "fixed";
+        fire.style.left = Math.random()*100 + "vw";
+        fire.style.top = Math.random()*60 + "vh";
+        fire.style.fontSize = (Math.random()*25+20) + "px";
+        fire.style.pointerEvents = "none";
+        fire.style.transition = "1.5s";
 
-}
+        document.body.appendChild(fire);
 
-}
+        setTimeout(()=>{
+            fire.style.transform = "scale(3
+/* Contador de corazones */
 
-</script>
+let total = 0;
 
-</body>
-</html>
+const contador = document.createElement("div");
+
+contador.style.position = "fixed";
+contador.style.bottom = "20px";
+contador.style.right = "20px";
+contador.style.background = "rgba(255,255,255,.9)";
+contador.style.color = "#e91e63";
+contador.style.padding = "12px 18px";
+contador.style.borderRadius = "30px";
+contador.style.fontWeight = "bold";
+contador.style.boxShadow = "0 8px 20px rgba(0,0,0,.2)";
+contador.innerHTML = "❤️ Amor para la suegrita: 0";
+
+document.body.appendChild(contador);
+
+setInterval(() => {
+
+    total++;
+
+    contador.innerHTML = `❤️ Amor para la suegrita: ${total}`;
+
+}, 1000);
+      
