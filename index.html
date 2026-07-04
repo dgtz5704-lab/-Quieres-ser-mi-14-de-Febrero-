@@ -7,54 +7,62 @@
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
-
+/* ===== FONDO ===== */
 body{
-background:linear-gradient(135deg,#ff5f9e,#ffb6c1,#ffe4ec);
-overflow:hidden;
+margin:0;
 height:100vh;
+overflow:hidden;
 display:flex;
 justify-content:center;
 align-items:center;
-text-align:center;
+font-family:Arial;
+background:linear-gradient(-45deg,#ff4d88,#ffb3c6,#ffd6e7,#fff);
+background-size:400% 400%;
+animation:bg 10s infinite;
 color:white;
+text-align:center;
 }
 
+@keyframes bg{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+/* ===== CARD ===== */
 .card{
 width:90%;
-max-width:700px;
-background:rgba(255,255,255,.15);
-backdrop-filter:blur(10px);
-padding:40px;
+max-width:750px;
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(12px);
+padding:30px;
 border-radius:25px;
-box-shadow:0 15px 35px rgba(0,0,0,.25);
+box-shadow:0 20px 50px rgba(0,0,0,.3);
+position:relative;
+z-index:2;
 }
 
+/* ===== TEXTOS ===== */
 h1{
-font-size:55px;
-margin-bottom:15px;
+font-size:42px;
+margin-bottom:10px;
 }
 
 p{
-font-size:22px;
+font-size:20px;
 line-height:1.6;
-margin:20px 0;
 }
 
+/* ===== BOTONES ===== */
 button{
-padding:15px 35px;
-font-size:20px;
+margin:10px;
+padding:14px 28px;
 border:none;
-border-radius:40px;
+border-radius:30px;
 cursor:pointer;
+font-size:18px;
 background:white;
 color:#ff2d75;
-margin:10px;
 transition:.3s;
 }
 
@@ -62,303 +70,117 @@ button:hover{
 transform:scale(1.1);
 }
 
+/* ===== PASTEL ===== */
 #cake{
 font-size:120px;
 cursor:pointer;
 transition:.3s;
 }
 
+#cake:active{
+transform:scale(1.2);
+}
+
+/* ===== VELAS ===== */
 .candle{
-font-size:35px;
+font-size:30px;
 cursor:pointer;
 }
 
+/* ===== REGALO ===== */
 #gift{
-font-size:100px;
+font-size:90px;
 display:none;
 cursor:pointer;
+animation:pop .6s ease;
 }
 
-#message{
+@keyframes pop{
+from{transform:scale(0);}
+to{transform:scale(1);}
+}
+
+/* ===== MENSAJE ===== */
+#msg{
 display:none;
-font-size:28px;
-margin-top:20px;
+font-size:22px;
+margin-top:15px;
 animation:fade 1s;
 }
 
 @keyframes fade{
-from{opacity:0;}
-to{opacity:1;}
+from{opacity:0}
+to{opacity:1}
 }
 
+/* ===== CORAZONES ===== */
 .heart{
 position:absolute;
-font-size:25px;
+font-size:20px;
 animation:up 5s linear forwards;
 }
 
 @keyframes up{
-0%{
-transform:translateY(0);
-opacity:1;
-}
-100%{
-transform:translateY(-120vh);
-opacity:0;
-}
+0%{transform:translateY(0);opacity:1}
+100%{transform:translateY(-120vh);opacity:0}
 }
 
-</style>
-</head>
-
-<body>
-
-<div class="card">
-
-<h1>🎉 Feliz Cumpleaños Suegrita 🎉</h1>
-
-<p>
-Hoy queremos desearle un día lleno de amor,
-felicidad, salud y muchas bendiciones.
-❤️
-</p>
-
-<div>
-
-<span class="candle">🕯️</span>
-<span class="candle">🕯️</span>
-<span class="candle">🕯️</span>
-
-</div>
-
-<div id="cake">
-🎂
-</div>
-
-<button onclick="abrirRegalo()">
-🎁 Abrir Regalo
-</button>
-
-<div id="gift">
-🎁
-</div>
-
-<div id="message">
-
-🌹
-
-¡Feliz Cumpleaños Suegrita!
-
-<br><br>
-
-Que Dios la bendiga siempre.
-
-Gracias por su cariño,
-
-sus consejos
-
-y por formar parte de nuestra familia.
-
-❤️
-
-</div>
-
-</div>
-
-<script>
-
-const velas=document.querySelectorAll(".candle");
-
-let apagadas=0;
-
-velas.forEach(v=>{
-
-v.onclick=()=>{
-
-if(v.innerHTML=="🕯️"){
-
-v.innerHTML="💨";
-
-apagadas++;
-
+/* ===== CONFETI ===== */
+.conf{
+position:absolute;
+width:8px;
+height:8px;
+animation:fall 4s linear forwards;
 }
 
-if(apagadas==3){
-
-alert("🎂 ¡Pida un deseo!");
-
-lluvia();
-
+@keyframes fall{
+to{transform:translateY(100vh) rotate(720deg);}
 }
 
-}
-
-});
-
-function abrirRegalo(){
-
-document.getElementById("gift").style.display="block";
-
-document.getElementById("message").style.display="block";
-
-lluvia();
-
-}
-
-function lluvia(){
-
-for(let i=0;i<100;i++){
-
-let h=document.createElement("div");
-
-h.className="heart";
-
-h.innerHTML=Math.random()>0.5?"❤️":"🌸";
-
-h.style.left=Math.random()*100+"vw";
-
-h.style.bottom="-50px";
-
-h.style.fontSize=(20+Math.random()*25)+"px";
-
-h.style.animationDuration=(3+Math.random()*4)+"s";
-
-document.body.appendChild(h);
-
-setTimeout(()=>{
-
-h.remove();
-
-},7000);
-
-}
-
-}
-
-document.getElementById("cake").onclick=function(){
-
-this.style.transform="scale(1.2) rotate(8deg)";
-
-setTimeout(()=>{
-
-this.style.transform="scale(1)";
-
-},400);
-
-}
-
-</script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🎂 Feliz Cumpleaños Suegrita</title>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
-background:linear-gradient(135deg,#ff5f9e,#ffb6c1,#ffe4ec);
-overflow:hidden;
-height:100vh;
+/* ===== INTRO ===== */
+#intro{
+position:absolute;
+width:100%;
+height:100%;
+background:#ff2d75;
 display:flex;
 justify-content:center;
 align-items:center;
-text-align:center;
-color:white;
+flex-direction:column;
+z-index:10;
 }
 
-.card{
-width:90%;
-max-width:700px;
-background:rgba(255,255,255,.15);
-backdrop-filter:blur(10px);
-padding:40px;
-border-radius:25px;
-box-shadow:0 15px 35px rgba(0,0,0,.25);
+#intro h2{
+font-size:40px;
+animation:zoom 1.2s infinite alternate;
 }
 
-h1{
-font-size:55px;
-margin-bottom:15px;
+@keyframes zoom{
+from{transform:scale(1)}
+to{transform:scale(1.1)}
 }
 
-p{
-font-size:22px;
-line-height:1.6;
-margin:20px 0;
-}
-
-button{
-padding:15px 35px;
-font-size:20px;
-border:none;
-border-radius:40px;
-cursor:pointer;
+/* ===== CONTADOR ===== */
+#counter{
+position:fixed;
+bottom:10px;
+right:10px;
 background:white;
 color:#ff2d75;
-margin:10px;
-transition:.3s;
+padding:10px 15px;
+border-radius:20px;
+font-weight:bold;
 }
 
-button:hover{
-transform:scale(1.1);
-}
-
-#cake{
-font-size:120px;
-cursor:pointer;
-transition:.3s;
-}
-
-.candle{
-font-size:35px;
-cursor:pointer;
-}
-
-#gift{
-font-size:100px;
-display:none;
-cursor:pointer;
-}
-
-#message{
-display:none;
-font-size:28px;
-margin-top:20px;
-animation:fade 1s;
-}
-
-@keyframes fade{
-from{opacity:0;}
-to{opacity:1;}
-}
-
-.heart{
+/* ===== FLORES ===== */
+.flower{
 position:absolute;
-font-size:25px;
-animation:up 5s linear forwards;
+font-size:22px;
+animation:down 6s linear forwards;
 }
 
-@keyframes up{
-0%{
-transform:translateY(0);
-opacity:1;
-}
-100%{
-transform:translateY(-120vh);
-opacity:0;
-}
+@keyframes down{
+to{transform:translateY(110vh) rotate(360deg);}
 }
 
 </style>
@@ -366,138 +188,115 @@ opacity:0;
 
 <body>
 
+<!-- INTRO -->
+<div id="intro" onclick="start()">
+<h2>🎉 Toca para empezar la sorpresa 🎉</h2>
+</div>
+
+<!-- TARJETA -->
 <div class="card">
 
-<h1>🎉 Feliz Cumpleaños Suegrita 🎉</h1>
+<h1>🎂 Feliz Cumpleaños Suegrita 🎂</h1>
 
 <p>
-Hoy queremos desearle un día lleno de amor,
-felicidad, salud y muchas bendiciones.
-❤️
+Hoy celebramos a una persona muy especial ❤️<br>
+Gracias por su cariño, apoyo y amor.
 </p>
 
 <div>
-
 <span class="candle">🕯️</span>
 <span class="candle">🕯️</span>
 <span class="candle">🕯️</span>
-
 </div>
 
-<div id="cake">
-🎂
-</div>
+<div id="cake">🎂</div>
 
-<button onclick="abrirRegalo()">
-🎁 Abrir Regalo
-</button>
+<button onclick="regalo()">🎁 Abrir regalo</button>
+<button onclick="fiesta()">🎊 Celebrar</button>
 
-<div id="gift">
-🎁
-</div>
+<div id="gift">🎁</div>
 
-<div id="message">
-
-🌹
-
-¡Feliz Cumpleaños Suegrita!
-
-<br><br>
-
-Que Dios la bendiga siempre.
-
-Gracias por su cariño,
-
-sus consejos
-
-y por formar parte de nuestra familia.
-
-❤️
-
+<div id="msg">
+🌹 Feliz cumpleaños suegrita 🌹<br><br>
+Que Dios la bendiga con salud, amor y felicidad ❤️
 </div>
 
 </div>
+
+<div id="counter">❤️ Amor: 0</div>
 
 <script>
 
-const velas=document.querySelectorAll(".candle");
+let amor=0;
 
-let apagadas=0;
-
-velas.forEach(v=>{
-
-v.onclick=()=>{
-
-if(v.innerHTML=="🕯️"){
-
-v.innerHTML="💨";
-
-apagadas++;
-
+/* intro */
+function start(){
+document.getElementById("intro").style.display="none";
 }
 
-if(apagadas==3){
+/* contador */
+setInterval(()=>{
+amor++;
+document.getElementById("counter").innerText="❤️ Amor: "+amor;
+},1000);
 
-alert("🎂 ¡Pida un deseo!");
-
-lluvia();
-
-}
-
-}
-
+/* velas */
+document.querySelectorAll(".candle").forEach(v=>{
+v.onclick=()=>v.innerHTML="💨";
 });
 
-function abrirRegalo(){
+/* pastel */
+document.getElementById("cake").onclick=()=>{
+corazones();
+fiesta();
+}
 
+/* regalo */
+function regalo(){
 document.getElementById("gift").style.display="block";
-
-document.getElementById("message").style.display="block";
-
-lluvia();
-
+document.getElementById("msg").style.display="block";
+corazones();
 }
 
-function lluvia(){
-
-for(let i=0;i<100;i++){
-
+/* corazones */
+function corazones(){
+for(let i=0;i<70;i++){
 let h=document.createElement("div");
-
 h.className="heart";
-
 h.innerHTML=Math.random()>0.5?"❤️":"🌸";
-
 h.style.left=Math.random()*100+"vw";
-
-h.style.bottom="-50px";
-
-h.style.fontSize=(20+Math.random()*25)+"px";
-
+h.style.top="100vh";
 h.style.animationDuration=(3+Math.random()*4)+"s";
-
 document.body.appendChild(h);
-
-setTimeout(()=>{
-
-h.remove();
-
-},7000);
-
+setTimeout(()=>h.remove(),7000);
+}
 }
 
+/* confeti */
+function fiesta(){
+for(let i=0;i<120;i++){
+let c=document.createElement("div");
+c.className="conf";
+c.style.left=Math.random()*100+"vw";
+c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+c.style.animationDuration=(2+Math.random()*3)+"s";
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),5000);
+}
+flores();
 }
 
-document.getElementById("cake").onclick=function(){
-
-this.style.transform="scale(1.2) rotate(8deg)";
-
-setTimeout(()=>{
-
-this.style.transform="scale(1)";
-
-},400);
-
+/* flores */
+function flores(){
+for(let i=0;i<40;i++){
+let f=document.createElement("div");
+f.className="flower";
+f.innerHTML="🌸";
+f.style.left=Math.random()*100+"vw";
+f.style.animationDuration=(3+Math.random()*4)+"s";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),6000);
+}
 }
 
 </script>
