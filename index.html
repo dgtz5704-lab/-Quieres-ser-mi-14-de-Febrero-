@@ -2,458 +2,197 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title> Mi San Valentín ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<title>¡Feliz Cumpleaños Suegrita! 🎂</title>
 
 <style>
-/* =========================================
-   FONDO Y NUBES (ESTILO MINECRAFT)
-   ========================================= */
-body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #ff5f8d, #ffb3c6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Press Start 2P', cursive;
-    overflow: hidden;
-    user-select: none;
-    position: relative;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
 }
 
-.cloud {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.6);
-    width: 100px;
-    height: 30px;
-    z-index: 1;
-    animation: moveCloud linear infinite;
-    box-shadow: 
-        20px -20px 0 0 rgba(255, 255, 255, 0.6),
-        40px -20px 0 0 rgba(255, 255, 255, 0.6),
-        20px 20px 0 0 rgba(255, 255, 255, 0.6);
+body{
+background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
 }
 
-.c1 { top: 20%; left: -20%; animation-duration: 25s; transform: scale(1.5); }
-.c2 { top: 50%; left: -20%; animation-duration: 35s; transform: scale(1); animation-delay: 5s; }
-.c3 { top: 10%; left: -20%; animation-duration: 40s; transform: scale(0.8); animation-delay: 10s; }
-
-@keyframes moveCloud {
-    0% { left: -150px; }
-    100% { left: 110vw; }
+.card{
+width:90%;
+max-width:700px;
+background:white;
+padding:40px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 20px 50px rgba(0,0,0,.25);
+animation:aparecer 1.5s;
+position:relative;
+z-index:2;
 }
 
-/* =========================================
-   PANTALLA DE INICIO (INTRO)
-   ========================================= */
-#intro-screen {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    text-align: center;
-    cursor: pointer;
+h1{
+font-size:3em;
+color:#d63384;
+margin-bottom:15px;
 }
 
-.blink-text {
-    font-size: 12px;
-    margin-top: 20px;
-    color: #ffff55;
-    animation: blink 1s infinite;
-    line-height: 1.5;
+h2{
+color:#ff4081;
+margin-bottom:20px;
 }
 
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+p{
+font-size:20px;
+line-height:1.7;
+color:#444;
 }
 
-/* =========================================
-   LA CARTA (ESTILO GUI MINECRAFT REAL)
-   ========================================= */
-.minecraft-card {
-    background-color: #C6C6C6; 
-    border: 4px solid #000;
-    box-shadow: inset 6px 6px 0px #FFF, inset -6px -6px 0px #555;
-    padding: 30px;
-    width: 90%;
-    max-width: 380px;
-    text-align: center;
-    position: relative;
-    z-index: 10;
-    color: #404040;
-    display: none;
+.flores{
+font-size:45px;
+margin-bottom:15px;
 }
 
-h1.pixel-text {
-    font-size: 14px;
-    color: #404040;
-    line-height: 1.6;
-    margin-bottom: 25px;
-    text-shadow: 2px 2px 0px #fff;
-    text-transform: uppercase;
+.pastel{
+font-size:90px;
+animation:flotar 2s infinite alternate;
+margin:20px 0;
 }
 
-.mc-input {
-    width: 100%;
-    background: #000;
-    border: 2px solid #A0A0A0;
-    border-top-color: #505050;
-    border-left-color: #505050;
-    padding: 12px;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 10px;
-    margin-bottom: 15px;
-    color: #fff;
-    outline: none;
-    box-sizing: border-box;
-}
-.mc-input::placeholder { color: #aaa; }
-
-.input-label {
-    font-size: 10px;
-    margin-bottom: 8px;
-    display: block;
-    color: #404040;
-    text-align: left;
-    text-transform: uppercase;
+button{
+margin-top:25px;
+padding:15px 30px;
+font-size:18px;
+border:none;
+border-radius:40px;
+background:#ff4081;
+color:white;
+cursor:pointer;
+transition:.4s;
 }
 
-/* =========================================
-   BOTONES (ESTILO BLOQUE 3D)
-   ========================================= */
-.mc-btn {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 12px;
-    padding: 15px 10px;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 10px;
-    text-transform: uppercase;
-    color: #fff;
-    text-shadow: 2px 2px 0 #333;
-    border: 2px solid #000;
-    box-shadow: inset 4px 4px 0 rgba(255,255,255,0.3), inset -4px -4px 0 rgba(0,0,0,0.3);
-    position: relative;
-    transition: transform 0.1s;
+button:hover{
+transform:scale(1.08);
+background:#e91e63;
 }
 
-.mc-btn:active {
-    transform: translateY(3px);
-    box-shadow: inset 4px 4px 0 rgba(0,0,0,0.3), inset -4px -4px 0 rgba(255,255,255,0.1);
+@keyframes flotar{
+from{transform:translateY(0);}
+to{transform:translateY(-15px);}
 }
 
-.btn-green { background-color: #568203; }
-.btn-red { background-color: #AA0000; }
-.btn-blue { background-color: #3C85E0; }
-
-.btn-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 25px;
-    min-height: 60px;
+@keyframes aparecer{
+from{
+opacity:0;
+transform:scale(.8);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
 }
 
-.btn-runaway { position: fixed !important; z-index: 100; }
-
-.result-area {
-    display: none; background: #e0e0e0; border: 2px solid #555; padding: 10px; margin-top: 15px;
-}
-.link-text {
-    font-family: Arial, sans-serif; font-size: 10px; word-break: break-all; color: #333; margin-bottom: 10px;
-}
-
-.pixel-heart-icon {
-    font-size: 30px; margin-bottom: 15px; animation: palpito 1s infinite;
-}
-@keyframes palpito {
-    0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); }
+.confeti{
+position:absolute;
+width:12px;
+height:12px;
+border-radius:50%;
+top:-20px;
+animation:caer linear infinite;
 }
 
-.credits-centered {
-    margin-top: 25px; font-size: 8px; color: #555; text-align: center; text-transform: uppercase; width: 100%;
+@keyframes caer{
+0%{
+transform:translateY(-20px) rotate(0deg);
 }
-
-/* =========================================
-   BOTÓN ESMERALDA Y MODAL DE APOYO
-   ========================================= */
-.emerald-btn {
-    display: none; /* OCULTO POR DEFECTO: Aparece con JS al ganar/generar */
-    position: fixed;
-    bottom: 35px; 
-    right: 20px;
-    width: 45px;
-    height: 45px;
-    background-color: #2eb32e; 
-    border: 3px solid #1b6b1b; 
-    transform: rotate(45deg); 
-    box-shadow: inset 5px 5px 0 #51e651, 4px 4px 0 rgba(0,0,0,0.4);
-    cursor: pointer;
-    z-index: 90;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.1s;
+100%{
+transform:translateY(110vh) rotate(720deg);
 }
-
-.emerald-btn::after {
-    content: '$';
-    color: #e6ffe6;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 20px;
-    transform: rotate(-45deg); 
-    text-shadow: 2px 2px 0 #1b6b1b;
 }
-
-.emerald-btn:active { transform: rotate(45deg) scale(0.9); }
-
-.modal-overlay {
-    display: none; 
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7);
-    z-index: 200;
-    align-items: center;
-    justify-content: center;
-}
-
-.mc-modal {
-    background-color: #C6C6C6;
-    border: 4px solid #000;
-    box-shadow: inset 6px 6px 0px #FFF, inset -6px -6px 0px #555;
-    padding: 25px;
-    width: 85%;
-    max-width: 320px;
-    text-align: center;
-    position: relative;
-    color: #404040;
-}
-
-.close-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: #AA0000;
-    color: white;
-    border: 2px solid #000;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 10px;
-    padding: 4px 8px;
-    cursor: pointer;
-    box-shadow: inset 2px 2px 0 rgba(255,255,255,0.3);
-}
-
-.account-info {
-    background: #000;
-    color: #51e651; 
-    padding: 15px;
-    font-family: monospace; 
-    font-size: 14px;
-    border: 2px solid #555;
-    word-break: break-all;
-    margin: 15px 0;
-    user-select: text; 
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="cloud c1"></div>
-<div class="cloud c2"></div>
-<div class="cloud c3"></div>
+<div class="card">
 
-<audio id="bgm" loop><source src="minecraft-music.mp3" type="audio/mpeg"></audio>
-<audio id="sfx-success"><source src="levelup.mp3" type="audio/mpeg"></audio>
-
-<div id="intro-screen">
-    <div style="font-size: 40px; margin-bottom: 20px;">💘</div>
-    <h1 style="font-size: 16px; text-shadow: 2px 2px #333; line-height: 1.5;">SAN<br>VALENTIN</h1>
-    <p class="blink-text">> PRESIONA CUALQUIER TECLA <<br>O TOCA LA PANTALLA</p>
+<div class="flores">
+🌷🌹🌺🌸💐
 </div>
 
-<div id="screen-creator" class="minecraft-card">
-    <div style="font-size:30px; margin-bottom:10px;">🛠️💗</div>
-    <h1 class="pixel-text">Craftear Carta</h1>
-    <label class="input-label">Tu Nombre:</label>
-    <input type="text" id="inputFrom" class="mc-input" placeholder="Steve">
-    <label class="input-label">Para:</label>
-    <input type="text" id="inputTo" class="mc-input" placeholder="Alex">
-    <button class="mc-btn btn-green" onclick="generateLink()">GENERAR MUNDO 🌍</button>
-    <div id="result" class="result-area">
-        <div class="link-text" id="linkText"></div>
-        <button class="mc-btn btn-blue" style="font-size:10px; padding:8px;" onclick="copyLink()">COPIAR LINK</button>
-        <button class="mc-btn btn-green" style="font-size:10px; padding:8px;" onclick="openLink()">VER CARTA</button>
-    </div>
-</div>
+<h1>🎉 ¡Feliz Cumpleaños Suegrita! 🎉</h1>
 
-<div id="screen-card" class="minecraft-card">
-    <div class="pixel-heart-icon">💎</div>
-    <h1 class="pixel-text" id="cardTitle"></h1>
-    <p style="font-size:10px; color:#333; margin-bottom:20px;" id="cardBody"></p>
-    <div class="btn-container">
-        <button id="btnSi" class="mc-btn btn-green" style="width: auto; min-width: 80px;">SÍ 💘</button>
-        <button id="btnNo" class="mc-btn btn-red" style="width: auto; min-width: 80px;">NO 🥀</button>
-    </div>
-    <div id="success-msg" style="display:none; margin-top:20px; border-top: 2px dashed #777; padding-top:15px;">
-        <h1 class="pixel-text" style="color:#568203;">¡LOGRO OBTENIDO!</h1>
-        <p style="font-size:10px; color:#333;">
-            <span id="final-msg-from"></span> dice:<br>"Eres el diamante más valioso de mi inventario. ¡Feliz San Valentín!"
-        </p>
-        <button class="mc-btn btn-blue" style="font-size:10px; margin-top:10px;" onclick="compartir()">Presumir 📸</button>
-        <div class="credits-centered">Created by Los colochos mx YouTube</div>
-    </div>
-</div>
+<div class="pastel">🎂</div>
 
-<div id="emeraldBtn" class="emerald-btn" onclick="showDonation()" title="Apoyar"></div>
+<h2>Con mucho cariño ❤️</h2>
 
-<div id="donationModal" class="modal-overlay" onclick="hideDonation(event)">
-    <div class="mc-modal">
-        <button class="close-btn" onclick="hideDonation(event)">X</button>
-        <div style="font-size: 30px; margin-bottom: 10px;">💚</div>
-        <h1 class="pixel-text" style="font-size: 12px;">Apoyar al Creador</h1>
-        <p style="font-size: 10px; margin-bottom: 15px;">Si te gustó, puedes apoyarme con una donacióncita:</p>
-        <div class="account-info">
-            CLABE / CUENTA:<br>
-            4152313908276152
-        </div>
-        <p style="font-size: 8px; color: #555;">¡Gracias por ser un crack! colochit@s 💎</p>
-    </div>
+<p>
+Hoy celebramos a una persona muy especial.
+Gracias por su cariño, sus consejos, su alegría
+y por siempre recibirnos con una sonrisa.
+</p>
+
+<br>
+
+<p>
+Le deseo un año lleno de salud,
+felicidad, bendiciones,
+amor y momentos inolvidables.
+Que todos sus sueños se hagan realidad.
+</p>
+
+<br>
+
+<p>
+🌹 Que Dios la bendiga siempre.
+Disfrute muchísimo este hermoso día.
+¡Muchas felicidades, suegrita! ❤️
+</p>
+
+<button onclick="felicitar()">
+🎁 Abrir sorpresa
+</button>
+
 </div>
 
 <script>
-// =========================================
-// LOGICA DE AUDIO & INICIO
-// =========================================
-const audioBgm = document.getElementById("bgm");
-const audioSuccess = document.getElementById("sfx-success");
-const introScreen = document.getElementById("intro-screen");
-const emeraldBtn = document.getElementById("emeraldBtn");
 
-audioBgm.volume = 0.5; 
-audioSuccess.volume = 0.8;
+function felicitar(){
 
-// Función para iniciar la App
-function startApp() {
-    audioBgm.play().catch(e => console.log("Error audio:", e));
-    introScreen.style.transition = "opacity 0.5s";
-    introScreen.style.opacity = "0";
-    setTimeout(() => {
-        introScreen.style.display = "none";
-        checkParams();
-    }, 500);
+alert("🎂 ¡Feliz Cumpleaños Suegrita! Que tenga un día lleno de amor, salud, alegría y muchas bendiciones. ❤️");
+
+lanzarConfeti();
+
 }
 
-introScreen.addEventListener('click', startApp);
-window.addEventListener('keydown', startApp);
+function lanzarConfeti(){
 
-function playLevelUp() {
-    audioSuccess.currentTime = 0;
-    audioSuccess.play().catch(e => console.log("Audio prevent"));
+for(let i=0;i<200;i++){
+
+const c=document.createElement("div");
+
+c.className="confeti";
+
+c.style.left=Math.random()*100+"vw";
+
+c.style.animationDuration=(Math.random()*3+2)+"s";
+
+c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+
+document.body.appendChild(c);
+
+setTimeout(()=>{
+c.remove();
+},6000);
+
 }
 
-// =========================================
-// LOGICA DE NAVEGACIÓN
-// =========================================
-const params = new URLSearchParams(window.location.search);
-const hasParams = params.has("to") && params.has("from");
-
-function checkParams() {
-    if (hasParams) {
-        document.getElementById("screen-creator").style.display = "none";
-        document.getElementById("screen-card").style.display = "block";
-        initCardLogic();
-    } else {
-        document.getElementById("screen-creator").style.display = "block";
-        document.getElementById("screen-card").style.display = "none";
-    }
 }
 
-function initCardLogic() {
-    const toName = params.get("to");
-    const fromName = params.get("from");
-    document.getElementById("cardTitle").innerHTML = `${toName},<br>¿Quieres ser mi<br>San Valentín?`;
-    document.getElementById("cardBody").innerText = `${fromName} quiere construir un mundo contigo.`;
-    document.getElementById("final-msg-from").innerText = fromName;
-
-    const btnNo = document.getElementById("btnNo");
-    const moveButton = (e) => {
-        const w = window.innerWidth; const h = window.innerHeight;
-        btnNo.classList.add("btn-runaway");
-        btnNo.style.left = (Math.random() * (w - 100)) + "px";
-        btnNo.style.top = (Math.random() * (h - 100)) + "px";
-    };
-    btnNo.addEventListener("mouseover", moveButton);
-    btnNo.addEventListener("touchstart", (e) => { e.preventDefault(); moveButton(); });
-    btnNo.addEventListener("click", (e) => { e.preventDefault(); moveButton(); });
-
-    document.getElementById("btnSi").onclick = () => {
-        playLevelUp();
-        document.getElementById("success-msg").style.display = "block";
-        document.querySelector(".btn-container").style.display = "none";
-        lanzarConfetiXP();
-        // MOSTRAR BOTÓN DONACIÓN DESPUÉS DEL SÍ
-        emeraldBtn.style.display = "flex";
-    };
-}
-
-// Funciones del Creador
-function generateLink() {
-    playLevelUp();
-    const from = document.getElementById("inputFrom").value.trim() || "Steve";
-    const to = document.getElementById("inputTo").value.trim() || "Alex";
-    const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}?to=${encodeURIComponent(to)}&from=${encodeURIComponent(from)}`;
-    document.getElementById("linkText").innerText = url;
-    document.getElementById("result").style.display = "block";
-    // MOSTRAR BOTÓN DONACIÓN DESPUÉS DE GENERAR
-    emeraldBtn.style.display = "flex";
-}
-
-function copyLink() {
-    navigator.clipboard.writeText(document.getElementById("linkText").innerText);
-    alert("Copiado al portapapeles 📋");
-}
-function openLink() { window.location.href = document.getElementById("linkText").innerText; }
-function compartir() { alert("¡Toma captura y súbelo a tus estados! 📸"); }
-
-// Confeti XP
-function lanzarConfetiXP() {
-    const colors = ['#88ff00', '#aaff55', '#ccff00', '#bbff33'];
-    for(let i=0; i<50; i++) {
-        const c = document.createElement('div');
-        c.style.position = 'fixed';
-        const size = (Math.random() * 12 + 5) + 'px';
-        c.style.width = size; c.style.height = size;
-        c.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
-        c.style.borderRadius = '50%';
-        c.style.boxShadow = '0 0 6px ' + c.style.backgroundColor;
-        c.style.left = Math.random()*100 + 'vw'; c.style.top = '-20px';
-        c.style.transition = 'top 3s ease-in, left 3s ease-out, opacity 3s';
-        c.style.zIndex = '999';
-        document.body.appendChild(c);
-        setTimeout(() => {
-            c.style.top = '110vh';
-            c.style.left = (parseFloat(c.style.left) + (Math.random()*20 - 10)) + 'vw';
-            c.style.opacity = '0';
-        }, 100);
-    }
-}
-
-// Modal Donación
-function showDonation() { document.getElementById('donationModal').style.display = 'flex'; }
-function hideDonation(event) {
-    if (event.target.classList.contains('modal-overlay') || event.target.classList.contains('close-btn')) {
-        document.getElementById('donationModal').style.display = 'none';
-    }
-}
 </script>
 
 </body>
